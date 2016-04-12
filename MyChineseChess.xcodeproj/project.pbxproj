@@ -1,0 +1,519 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		18CC23E81CBD2336004C5A76 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC23E71CBD2336004C5A76 /* main.m */; };
+		18CC23EB1CBD2336004C5A76 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC23EA1CBD2336004C5A76 /* AppDelegate.m */; };
+		18CC23EE1CBD2336004C5A76 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC23ED1CBD2336004C5A76 /* ViewController.m */; };
+		18CC23F11CBD2336004C5A76 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18CC23EF1CBD2336004C5A76 /* Main.storyboard */; };
+		18CC23F31CBD2336004C5A76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18CC23F21CBD2336004C5A76 /* Assets.xcassets */; };
+		18CC23F61CBD2336004C5A76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18CC23F41CBD2336004C5A76 /* LaunchScreen.storyboard */; };
+		18CC24011CBD2336004C5A76 /* MyChineseChessTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC24001CBD2336004C5A76 /* MyChineseChessTests.m */; };
+		18CC240C1CBD2336004C5A76 /* MyChineseChessUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC240B1CBD2336004C5A76 /* MyChineseChessUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		18CC23FD1CBD2336004C5A76 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18CC23DB1CBD2336004C5A76 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 18CC23E21CBD2336004C5A76;
+			remoteInfo = MyChineseChess;
+		};
+		18CC24081CBD2336004C5A76 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18CC23DB1CBD2336004C5A76 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 18CC23E21CBD2336004C5A76;
+			remoteInfo = MyChineseChess;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		18CC23E31CBD2336004C5A76 /* MyChineseChess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyChineseChess.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18CC23E71CBD2336004C5A76 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		18CC23E91CBD2336004C5A76 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		18CC23EA1CBD2336004C5A76 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		18CC23EC1CBD2336004C5A76 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		18CC23ED1CBD2336004C5A76 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		18CC23F01CBD2336004C5A76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		18CC23F21CBD2336004C5A76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		18CC23F51CBD2336004C5A76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		18CC23F71CBD2336004C5A76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18CC23FC1CBD2336004C5A76 /* MyChineseChessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyChineseChessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		18CC24001CBD2336004C5A76 /* MyChineseChessTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyChineseChessTests.m; sourceTree = "<group>"; };
+		18CC24021CBD2336004C5A76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18CC24071CBD2336004C5A76 /* MyChineseChessUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyChineseChessUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		18CC240B1CBD2336004C5A76 /* MyChineseChessUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyChineseChessUITests.m; sourceTree = "<group>"; };
+		18CC240D1CBD2336004C5A76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		18CC23E01CBD2336004C5A76 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18CC23F91CBD2336004C5A76 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18CC24041CBD2336004C5A76 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18CC23DA1CBD2336004C5A76 = {
+			isa = PBXGroup;
+			children = (
+				18CC23E51CBD2336004C5A76 /* MyChineseChess */,
+				18CC23FF1CBD2336004C5A76 /* MyChineseChessTests */,
+				18CC240A1CBD2336004C5A76 /* MyChineseChessUITests */,
+				18CC23E41CBD2336004C5A76 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		18CC23E41CBD2336004C5A76 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18CC23E31CBD2336004C5A76 /* MyChineseChess.app */,
+				18CC23FC1CBD2336004C5A76 /* MyChineseChessTests.xctest */,
+				18CC24071CBD2336004C5A76 /* MyChineseChessUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		18CC23E51CBD2336004C5A76 /* MyChineseChess */ = {
+			isa = PBXGroup;
+			children = (
+				18CC23E91CBD2336004C5A76 /* AppDelegate.h */,
+				18CC23EA1CBD2336004C5A76 /* AppDelegate.m */,
+				18CC23EC1CBD2336004C5A76 /* ViewController.h */,
+				18CC23ED1CBD2336004C5A76 /* ViewController.m */,
+				18CC23EF1CBD2336004C5A76 /* Main.storyboard */,
+				18CC23F21CBD2336004C5A76 /* Assets.xcassets */,
+				18CC23F41CBD2336004C5A76 /* LaunchScreen.storyboard */,
+				18CC23F71CBD2336004C5A76 /* Info.plist */,
+				18CC23E61CBD2336004C5A76 /* Supporting Files */,
+			);
+			path = MyChineseChess;
+			sourceTree = "<group>";
+		};
+		18CC23E61CBD2336004C5A76 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				18CC23E71CBD2336004C5A76 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		18CC23FF1CBD2336004C5A76 /* MyChineseChessTests */ = {
+			isa = PBXGroup;
+			children = (
+				18CC24001CBD2336004C5A76 /* MyChineseChessTests.m */,
+				18CC24021CBD2336004C5A76 /* Info.plist */,
+			);
+			path = MyChineseChessTests;
+			sourceTree = "<group>";
+		};
+		18CC240A1CBD2336004C5A76 /* MyChineseChessUITests */ = {
+			isa = PBXGroup;
+			children = (
+				18CC240B1CBD2336004C5A76 /* MyChineseChessUITests.m */,
+				18CC240D1CBD2336004C5A76 /* Info.plist */,
+			);
+			path = MyChineseChessUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		18CC23E21CBD2336004C5A76 /* MyChineseChess */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18CC24101CBD2336004C5A76 /* Build configuration list for PBXNativeTarget "MyChineseChess" */;
+			buildPhases = (
+				18CC23DF1CBD2336004C5A76 /* Sources */,
+				18CC23E01CBD2336004C5A76 /* Frameworks */,
+				18CC23E11CBD2336004C5A76 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyChineseChess;
+			productName = MyChineseChess;
+			productReference = 18CC23E31CBD2336004C5A76 /* MyChineseChess.app */;
+			productType = "com.apple.product-type.application";
+		};
+		18CC23FB1CBD2336004C5A76 /* MyChineseChessTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18CC24131CBD2336004C5A76 /* Build configuration list for PBXNativeTarget "MyChineseChessTests" */;
+			buildPhases = (
+				18CC23F81CBD2336004C5A76 /* Sources */,
+				18CC23F91CBD2336004C5A76 /* Frameworks */,
+				18CC23FA1CBD2336004C5A76 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				18CC23FE1CBD2336004C5A76 /* PBXTargetDependency */,
+			);
+			name = MyChineseChessTests;
+			productName = MyChineseChessTests;
+			productReference = 18CC23FC1CBD2336004C5A76 /* MyChineseChessTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		18CC24061CBD2336004C5A76 /* MyChineseChessUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18CC24161CBD2336004C5A76 /* Build configuration list for PBXNativeTarget "MyChineseChessUITests" */;
+			buildPhases = (
+				18CC24031CBD2336004C5A76 /* Sources */,
+				18CC24041CBD2336004C5A76 /* Frameworks */,
+				18CC24051CBD2336004C5A76 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				18CC24091CBD2336004C5A76 /* PBXTargetDependency */,
+			);
+			name = MyChineseChessUITests;
+			productName = MyChineseChessUITests;
+			productReference = 18CC24071CBD2336004C5A76 /* MyChineseChessUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		18CC23DB1CBD2336004C5A76 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = LAOMI;
+				TargetAttributes = {
+					18CC23E21CBD2336004C5A76 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					18CC23FB1CBD2336004C5A76 = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = 18CC23E21CBD2336004C5A76;
+					};
+					18CC24061CBD2336004C5A76 = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = 18CC23E21CBD2336004C5A76;
+					};
+				};
+			};
+			buildConfigurationList = 18CC23DE1CBD2336004C5A76 /* Build configuration list for PBXProject "MyChineseChess" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 18CC23DA1CBD2336004C5A76;
+			productRefGroup = 18CC23E41CBD2336004C5A76 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				18CC23E21CBD2336004C5A76 /* MyChineseChess */,
+				18CC23FB1CBD2336004C5A76 /* MyChineseChessTests */,
+				18CC24061CBD2336004C5A76 /* MyChineseChessUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		18CC23E11CBD2336004C5A76 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18CC23F61CBD2336004C5A76 /* LaunchScreen.storyboard in Resources */,
+				18CC23F31CBD2336004C5A76 /* Assets.xcassets in Resources */,
+				18CC23F11CBD2336004C5A76 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18CC23FA1CBD2336004C5A76 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18CC24051CBD2336004C5A76 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		18CC23DF1CBD2336004C5A76 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18CC23EE1CBD2336004C5A76 /* ViewController.m in Sources */,
+				18CC23EB1CBD2336004C5A76 /* AppDelegate.m in Sources */,
+				18CC23E81CBD2336004C5A76 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18CC23F81CBD2336004C5A76 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18CC24011CBD2336004C5A76 /* MyChineseChessTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18CC24031CBD2336004C5A76 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18CC240C1CBD2336004C5A76 /* MyChineseChessUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		18CC23FE1CBD2336004C5A76 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 18CC23E21CBD2336004C5A76 /* MyChineseChess */;
+			targetProxy = 18CC23FD1CBD2336004C5A76 /* PBXContainerItemProxy */;
+		};
+		18CC24091CBD2336004C5A76 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 18CC23E21CBD2336004C5A76 /* MyChineseChess */;
+			targetProxy = 18CC24081CBD2336004C5A76 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		18CC23EF1CBD2336004C5A76 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18CC23F01CBD2336004C5A76 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		18CC23F41CBD2336004C5A76 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18CC23F51CBD2336004C5A76 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		18CC240E1CBD2336004C5A76 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		18CC240F1CBD2336004C5A76 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		18CC24111CBD2336004C5A76 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MyChineseChess/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.laomi.MyChineseChess;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		18CC24121CBD2336004C5A76 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MyChineseChess/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.laomi.MyChineseChess;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		18CC24141CBD2336004C5A76 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = MyChineseChessTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.laomi.MyChineseChessTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyChineseChess.app/MyChineseChess";
+			};
+			name = Debug;
+		};
+		18CC24151CBD2336004C5A76 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = MyChineseChessTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.laomi.MyChineseChessTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyChineseChess.app/MyChineseChess";
+			};
+			name = Release;
+		};
+		18CC24171CBD2336004C5A76 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = MyChineseChessUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.laomi.MyChineseChessUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = MyChineseChess;
+			};
+			name = Debug;
+		};
+		18CC24181CBD2336004C5A76 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = MyChineseChessUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.laomi.MyChineseChessUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = MyChineseChess;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		18CC23DE1CBD2336004C5A76 /* Build configuration list for PBXProject "MyChineseChess" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18CC240E1CBD2336004C5A76 /* Debug */,
+				18CC240F1CBD2336004C5A76 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18CC24101CBD2336004C5A76 /* Build configuration list for PBXNativeTarget "MyChineseChess" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18CC24111CBD2336004C5A76 /* Debug */,
+				18CC24121CBD2336004C5A76 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		18CC24131CBD2336004C5A76 /* Build configuration list for PBXNativeTarget "MyChineseChessTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18CC24141CBD2336004C5A76 /* Debug */,
+				18CC24151CBD2336004C5A76 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		18CC24161CBD2336004C5A76 /* Build configuration list for PBXNativeTarget "MyChineseChessUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18CC24171CBD2336004C5A76 /* Debug */,
+				18CC24181CBD2336004C5A76 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 18CC23DB1CBD2336004C5A76 /* Project object */;
+}
