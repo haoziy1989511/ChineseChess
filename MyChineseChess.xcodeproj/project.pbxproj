@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18B1A5261CBD317100E74AB7 /* PrimeMinisterChess.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1A5251CBD317100E74AB7 /* PrimeMinisterChess.m */; };
+		18B1A5291CBD326B00E74AB7 /* SoldierChess.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1A5281CBD326B00E74AB7 /* SoldierChess.m */; };
+		18B1A52C1CBD335500E74AB7 /* GunFireChess.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1A52B1CBD335500E74AB7 /* GunFireChess.m */; };
+		18B1A52F1CBD33EF00E74AB7 /* HorseChess.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1A52E1CBD33EF00E74AB7 /* HorseChess.m */; };
+		18B1A5321CBD344900E74AB7 /* CarChess.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1A5311CBD344900E74AB7 /* CarChess.m */; };
+		18B1A5361CBD352800E74AB7 /* ChessPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1A5351CBD352800E74AB7 /* ChessPlayer.m */; };
 		18CC23E81CBD2336004C5A76 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC23E71CBD2336004C5A76 /* main.m */; };
 		18CC23EB1CBD2336004C5A76 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC23EA1CBD2336004C5A76 /* AppDelegate.m */; };
 		18CC23EE1CBD2336004C5A76 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC23ED1CBD2336004C5A76 /* ViewController.m */; };
@@ -15,6 +21,9 @@
 		18CC23F61CBD2336004C5A76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18CC23F41CBD2336004C5A76 /* LaunchScreen.storyboard */; };
 		18CC24011CBD2336004C5A76 /* MyChineseChessTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC24001CBD2336004C5A76 /* MyChineseChessTests.m */; };
 		18CC240C1CBD2336004C5A76 /* MyChineseChessUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC240B1CBD2336004C5A76 /* MyChineseChessUITests.m */; };
+		18CC241C1CBD2364004C5A76 /* BaseChess.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC241B1CBD2364004C5A76 /* BaseChess.m */; };
+		18CC24261CBD29FA004C5A76 /* KingChess.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC24251CBD29FA004C5A76 /* KingChess.m */; };
+		18CC24291CBD304C004C5A76 /* GuardChess.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC24281CBD304C004C5A76 /* GuardChess.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +44,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		18B1A5241CBD317100E74AB7 /* PrimeMinisterChess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrimeMinisterChess.h; sourceTree = "<group>"; };
+		18B1A5251CBD317100E74AB7 /* PrimeMinisterChess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrimeMinisterChess.m; sourceTree = "<group>"; };
+		18B1A5271CBD326B00E74AB7 /* SoldierChess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoldierChess.h; sourceTree = "<group>"; };
+		18B1A5281CBD326B00E74AB7 /* SoldierChess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoldierChess.m; sourceTree = "<group>"; };
+		18B1A52A1CBD335500E74AB7 /* GunFireChess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GunFireChess.h; sourceTree = "<group>"; };
+		18B1A52B1CBD335500E74AB7 /* GunFireChess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GunFireChess.m; sourceTree = "<group>"; };
+		18B1A52D1CBD33EF00E74AB7 /* HorseChess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorseChess.h; sourceTree = "<group>"; };
+		18B1A52E1CBD33EF00E74AB7 /* HorseChess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorseChess.m; sourceTree = "<group>"; };
+		18B1A5301CBD344900E74AB7 /* CarChess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarChess.h; sourceTree = "<group>"; };
+		18B1A5311CBD344900E74AB7 /* CarChess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarChess.m; sourceTree = "<group>"; };
+		18B1A5341CBD352800E74AB7 /* ChessPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChessPlayer.h; sourceTree = "<group>"; };
+		18B1A5351CBD352800E74AB7 /* ChessPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChessPlayer.m; sourceTree = "<group>"; };
 		18CC23E31CBD2336004C5A76 /* MyChineseChess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyChineseChess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18CC23E71CBD2336004C5A76 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18CC23E91CBD2336004C5A76 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,6 +72,12 @@
 		18CC24071CBD2336004C5A76 /* MyChineseChessUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyChineseChessUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18CC240B1CBD2336004C5A76 /* MyChineseChessUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyChineseChessUITests.m; sourceTree = "<group>"; };
 		18CC240D1CBD2336004C5A76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18CC241A1CBD2364004C5A76 /* BaseChess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseChess.h; sourceTree = "<group>"; };
+		18CC241B1CBD2364004C5A76 /* BaseChess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseChess.m; sourceTree = "<group>"; };
+		18CC24241CBD29FA004C5A76 /* KingChess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KingChess.h; sourceTree = "<group>"; };
+		18CC24251CBD29FA004C5A76 /* KingChess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KingChess.m; sourceTree = "<group>"; };
+		18CC24271CBD304C004C5A76 /* GuardChess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuardChess.h; sourceTree = "<group>"; };
+		18CC24281CBD304C004C5A76 /* GuardChess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuardChess.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +105,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18B1A5331CBD350500E74AB7 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				18B1A5341CBD352800E74AB7 /* ChessPlayer.h */,
+				18B1A5351CBD352800E74AB7 /* ChessPlayer.m */,
+			);
+			name = Player;
+			sourceTree = "<group>";
+		};
 		18CC23DA1CBD2336004C5A76 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +137,8 @@
 		18CC23E51CBD2336004C5A76 /* MyChineseChess */ = {
 			isa = PBXGroup;
 			children = (
+				18B1A5331CBD350500E74AB7 /* Player */,
+				18CC24191CBD233F004C5A76 /* Chesses */,
 				18CC23E91CBD2336004C5A76 /* AppDelegate.h */,
 				18CC23EA1CBD2336004C5A76 /* AppDelegate.m */,
 				18CC23EC1CBD2336004C5A76 /* ViewController.h */,
@@ -138,6 +176,85 @@
 				18CC240D1CBD2336004C5A76 /* Info.plist */,
 			);
 			path = MyChineseChessUITests;
+			sourceTree = "<group>";
+		};
+		18CC24191CBD233F004C5A76 /* Chesses */ = {
+			isa = PBXGroup;
+			children = (
+				18CC24231CBD2981004C5A76 /* KingChess */,
+				18CC24221CBD2967004C5A76 /* GuardChess */,
+				18CC24211CBD292C004C5A76 /* PrimeMinisterChess */,
+				18CC24201CBD279A004C5A76 /* SoldierChess */,
+				18CC241F1CBD278C004C5A76 /* GunFireChess */,
+				18CC241E1CBD2782004C5A76 /* HorseChess */,
+				18CC241D1CBD2768004C5A76 /* CarChess */,
+				18CC241A1CBD2364004C5A76 /* BaseChess.h */,
+				18CC241B1CBD2364004C5A76 /* BaseChess.m */,
+			);
+			name = Chesses;
+			sourceTree = "<group>";
+		};
+		18CC241D1CBD2768004C5A76 /* CarChess */ = {
+			isa = PBXGroup;
+			children = (
+				18B1A5301CBD344900E74AB7 /* CarChess.h */,
+				18B1A5311CBD344900E74AB7 /* CarChess.m */,
+			);
+			name = CarChess;
+			sourceTree = "<group>";
+		};
+		18CC241E1CBD2782004C5A76 /* HorseChess */ = {
+			isa = PBXGroup;
+			children = (
+				18B1A52D1CBD33EF00E74AB7 /* HorseChess.h */,
+				18B1A52E1CBD33EF00E74AB7 /* HorseChess.m */,
+			);
+			name = HorseChess;
+			sourceTree = "<group>";
+		};
+		18CC241F1CBD278C004C5A76 /* GunFireChess */ = {
+			isa = PBXGroup;
+			children = (
+				18B1A52A1CBD335500E74AB7 /* GunFireChess.h */,
+				18B1A52B1CBD335500E74AB7 /* GunFireChess.m */,
+			);
+			name = GunFireChess;
+			sourceTree = "<group>";
+		};
+		18CC24201CBD279A004C5A76 /* SoldierChess */ = {
+			isa = PBXGroup;
+			children = (
+				18B1A5271CBD326B00E74AB7 /* SoldierChess.h */,
+				18B1A5281CBD326B00E74AB7 /* SoldierChess.m */,
+			);
+			name = SoldierChess;
+			sourceTree = "<group>";
+		};
+		18CC24211CBD292C004C5A76 /* PrimeMinisterChess */ = {
+			isa = PBXGroup;
+			children = (
+				18B1A5241CBD317100E74AB7 /* PrimeMinisterChess.h */,
+				18B1A5251CBD317100E74AB7 /* PrimeMinisterChess.m */,
+			);
+			name = PrimeMinisterChess;
+			sourceTree = "<group>";
+		};
+		18CC24221CBD2967004C5A76 /* GuardChess */ = {
+			isa = PBXGroup;
+			children = (
+				18CC24271CBD304C004C5A76 /* GuardChess.h */,
+				18CC24281CBD304C004C5A76 /* GuardChess.m */,
+			);
+			name = GuardChess;
+			sourceTree = "<group>";
+		};
+		18CC24231CBD2981004C5A76 /* KingChess */ = {
+			isa = PBXGroup;
+			children = (
+				18CC24241CBD29FA004C5A76 /* KingChess.h */,
+				18CC24251CBD29FA004C5A76 /* KingChess.m */,
+			);
+			name = KingChess;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,9 +387,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18B1A52F1CBD33EF00E74AB7 /* HorseChess.m in Sources */,
+				18CC24291CBD304C004C5A76 /* GuardChess.m in Sources */,
+				18B1A5291CBD326B00E74AB7 /* SoldierChess.m in Sources */,
 				18CC23EE1CBD2336004C5A76 /* ViewController.m in Sources */,
+				18B1A5321CBD344900E74AB7 /* CarChess.m in Sources */,
+				18B1A52C1CBD335500E74AB7 /* GunFireChess.m in Sources */,
+				18CC24261CBD29FA004C5A76 /* KingChess.m in Sources */,
+				18B1A5361CBD352800E74AB7 /* ChessPlayer.m in Sources */,
 				18CC23EB1CBD2336004C5A76 /* AppDelegate.m in Sources */,
 				18CC23E81CBD2336004C5A76 /* main.m in Sources */,
+				18CC241C1CBD2364004C5A76 /* BaseChess.m in Sources */,
+				18B1A5261CBD317100E74AB7 /* PrimeMinisterChess.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +622,7 @@
 				18CC24121CBD2336004C5A76 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		18CC24131CBD2336004C5A76 /* Build configuration list for PBXNativeTarget "MyChineseChessTests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +631,7 @@
 				18CC24151CBD2336004C5A76 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		18CC24161CBD2336004C5A76 /* Build configuration list for PBXNativeTarget "MyChineseChessUITests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +640,7 @@
 				18CC24181CBD2336004C5A76 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
