@@ -25,6 +25,7 @@
     pFunctionType = functionTypePrimeMinister;
     pChessName = self.campType==campTypeRed?@"相":@"象";
     pAttackType = unAttacktiveType;
+    [super setup];
 }
 -(ChessFunctionType)functionType
 {

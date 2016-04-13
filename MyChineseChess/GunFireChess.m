@@ -22,6 +22,7 @@
     pFunctionType = functionTypeGunFire;
     pChessName = self.campType==campTypeRed?@"炮":@"砲";
     pAttackType = attacktiveType;
+    [super setup];
 }
 -(ChessFunctionType)functionType
 {

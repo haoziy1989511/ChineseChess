@@ -9,6 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+@class BaseChess;
+@protocol BaseChessDelegate <NSObject>
+
+-(void)chess:(BaseChess*)chess uiBeClicked:(UIButton*)btn;
+
+@end
+
+
 @interface BaseChess : NSObject
 typedef NS_ENUM(NSInteger,ChessAttackType)//棋子分为能过河和不能过河的
 {
@@ -22,7 +30,7 @@ typedef NS_ENUM(NSInteger,ChessCampType)//棋子分为红旗和黑棋
 {
     campTypeUnkown = 0,//未知阵营，不合法的棋子
     campTypeRed,//阵营，红棋
-    campTypeBlack = 1//阵营，黑棋
+    campTypeBlack//阵营，黑棋
 };
 typedef NS_ENUM(NSInteger,ChessFunctionType)//棋子功能类型
 {
@@ -42,6 +50,8 @@ typedef NS_ENUM(NSInteger,ChessFunctionType)//棋子功能类型
 @property(nonatomic,assign,readonly)ChessAttackType attackType;//功能，进攻型\防守型
 @property(nonatomic,assign)CGPoint localtion;//位置
 @property(nonatomic,assign)BOOL isDeath;//是否已经死亡
+@property(nonatomic,readonly,strong)UIButton *uiExhition;//棋子的UI呈现
+@property(nonatomic,weak) id<BaseChessDelegate> chessDelage;
 -(void)chess_move:(CGPoint)targetLocation;//移动方法
 -(BOOL)chess_canMoveToLocation:(CGPoint)location;
 -(instancetype)initWithCamp:(ChessCampType)camp location:(CGPoint)initPosition;

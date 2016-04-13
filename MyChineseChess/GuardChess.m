@@ -32,6 +32,7 @@
     pFunctionType = functionTypeGuard;
     pChessName = self.campType==campTypeRed?@"仕":@"士";
     pAttackType = unAttacktiveType;
+    [super setup];
 }
 -(ChessFunctionType)functionType
 {

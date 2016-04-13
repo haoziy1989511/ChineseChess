@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05ED510A1CBDE80E0013162D /* ChessBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED51091CBDE80E0013162D /* ChessBoard.m */; };
+		05ED510D1CBE375C0013162D /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED510C1CBE375C0013162D /* GameViewController.m */; };
 		18B1A5261CBD317100E74AB7 /* PrimeMinisterChess.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1A5251CBD317100E74AB7 /* PrimeMinisterChess.m */; };
 		18B1A5291CBD326B00E74AB7 /* SoldierChess.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1A5281CBD326B00E74AB7 /* SoldierChess.m */; };
 		18B1A52C1CBD335500E74AB7 /* GunFireChess.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1A52B1CBD335500E74AB7 /* GunFireChess.m */; };
@@ -16,7 +18,6 @@
 		18CC23E81CBD2336004C5A76 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC23E71CBD2336004C5A76 /* main.m */; };
 		18CC23EB1CBD2336004C5A76 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC23EA1CBD2336004C5A76 /* AppDelegate.m */; };
 		18CC23EE1CBD2336004C5A76 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC23ED1CBD2336004C5A76 /* ViewController.m */; };
-		18CC23F11CBD2336004C5A76 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18CC23EF1CBD2336004C5A76 /* Main.storyboard */; };
 		18CC23F31CBD2336004C5A76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18CC23F21CBD2336004C5A76 /* Assets.xcassets */; };
 		18CC23F61CBD2336004C5A76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18CC23F41CBD2336004C5A76 /* LaunchScreen.storyboard */; };
 		18CC24011CBD2336004C5A76 /* MyChineseChessTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC24001CBD2336004C5A76 /* MyChineseChessTests.m */; };
@@ -44,6 +45,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		05ED51081CBDE80E0013162D /* ChessBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChessBoard.h; sourceTree = "<group>"; };
+		05ED51091CBDE80E0013162D /* ChessBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChessBoard.m; sourceTree = "<group>"; };
+		05ED510B1CBE375C0013162D /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		05ED510C1CBE375C0013162D /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		18B1A5241CBD317100E74AB7 /* PrimeMinisterChess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrimeMinisterChess.h; sourceTree = "<group>"; };
 		18B1A5251CBD317100E74AB7 /* PrimeMinisterChess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrimeMinisterChess.m; sourceTree = "<group>"; };
 		18B1A5271CBD326B00E74AB7 /* SoldierChess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoldierChess.h; sourceTree = "<group>"; };
@@ -62,7 +67,6 @@
 		18CC23EA1CBD2336004C5A76 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		18CC23EC1CBD2336004C5A76 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		18CC23ED1CBD2336004C5A76 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		18CC23F01CBD2336004C5A76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		18CC23F21CBD2336004C5A76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18CC23F51CBD2336004C5A76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18CC23F71CBD2336004C5A76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -105,6 +109,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05ED51041CBDE5250013162D /* GameControl */ = {
+			isa = PBXGroup;
+			children = (
+				05ED51081CBDE80E0013162D /* ChessBoard.h */,
+				05ED51091CBDE80E0013162D /* ChessBoard.m */,
+				05ED510B1CBE375C0013162D /* GameViewController.h */,
+				05ED510C1CBE375C0013162D /* GameViewController.m */,
+			);
+			name = GameControl;
+			sourceTree = "<group>";
+		};
 		18B1A5331CBD350500E74AB7 /* Player */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,13 +152,13 @@
 		18CC23E51CBD2336004C5A76 /* MyChineseChess */ = {
 			isa = PBXGroup;
 			children = (
+				05ED51041CBDE5250013162D /* GameControl */,
 				18B1A5331CBD350500E74AB7 /* Player */,
 				18CC24191CBD233F004C5A76 /* Chesses */,
 				18CC23E91CBD2336004C5A76 /* AppDelegate.h */,
 				18CC23EA1CBD2336004C5A76 /* AppDelegate.m */,
 				18CC23EC1CBD2336004C5A76 /* ViewController.h */,
 				18CC23ED1CBD2336004C5A76 /* ViewController.m */,
-				18CC23EF1CBD2336004C5A76 /* Main.storyboard */,
 				18CC23F21CBD2336004C5A76 /* Assets.xcassets */,
 				18CC23F41CBD2336004C5A76 /* LaunchScreen.storyboard */,
 				18CC23F71CBD2336004C5A76 /* Info.plist */,
@@ -362,7 +377,6 @@
 			files = (
 				18CC23F61CBD2336004C5A76 /* LaunchScreen.storyboard in Resources */,
 				18CC23F31CBD2336004C5A76 /* Assets.xcassets in Resources */,
-				18CC23F11CBD2336004C5A76 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,9 +410,11 @@
 				18CC24261CBD29FA004C5A76 /* KingChess.m in Sources */,
 				18B1A5361CBD352800E74AB7 /* ChessPlayer.m in Sources */,
 				18CC23EB1CBD2336004C5A76 /* AppDelegate.m in Sources */,
+				05ED510D1CBE375C0013162D /* GameViewController.m in Sources */,
 				18CC23E81CBD2336004C5A76 /* main.m in Sources */,
 				18CC241C1CBD2364004C5A76 /* BaseChess.m in Sources */,
 				18B1A5261CBD317100E74AB7 /* PrimeMinisterChess.m in Sources */,
+				05ED510A1CBDE80E0013162D /* ChessBoard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,14 +450,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		18CC23EF1CBD2336004C5A76 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				18CC23F01CBD2336004C5A76 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		18CC23F41CBD2336004C5A76 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -540,6 +548,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MyChineseChess/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.laomi.MyChineseChess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -551,6 +560,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MyChineseChess/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.laomi.MyChineseChess;
 				PRODUCT_NAME = "$(TARGET_NAME)";

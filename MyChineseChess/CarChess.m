@@ -20,6 +20,7 @@
     pFunctionType = functionTypeCar;
     pChessName = self.campType==campTypeRed?@"車":@"車";
     pAttackType = attacktiveType;
+    [super setup];
 }
 -(ChessFunctionType)functionType
 {
