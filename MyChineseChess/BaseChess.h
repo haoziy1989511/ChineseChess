@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "ChessLocationModel.h"
 
 @class BaseChess;
 @protocol BaseChessDelegate <NSObject>
@@ -47,14 +48,14 @@ typedef NS_ENUM(NSInteger,ChessFunctionType)//棋子功能类型
 @property(nonatomic,assign,readonly)ChessCampType campType;//阵营
 @property(nonatomic,assign,readonly)ChessFunctionType functionType;//功能
 @property(nonatomic,copy,readonly)NSString *chessName;//名字
-@property(nonatomic,copy)NSString *chessCoordinateString;//棋子在棋盘中的坐标;
 @property(nonatomic,assign,readonly)ChessAttackType attackType;//功能，进攻型\防守型
-@property(nonatomic,assign)CGPoint localtion;//位置
+@property(nonatomic,strong)ChessLocationModel *relativeLocation;//位置对象
 @property(nonatomic,assign)BOOL isDeath;//是否已经死亡
 @property(nonatomic,readonly,strong)UIButton *uiExhition;//棋子的UI呈现
 @property(nonatomic,weak) id<BaseChessDelegate> chessDelage;
--(void)chess_move:(CGPoint)targetLocation;//移动方法
--(BOOL)chess_canMoveToLocation:(CGPoint)location;
+
+-(void)chess_move:(ChessLocationModel*)targetLocation;//移动方法
+-(BOOL)chess_canMoveToLocation:(ChessLocationModel*)location;
 -(instancetype)initWithCamp:(ChessCampType)camp location:(CGPoint)initPosition;
 -(void)setup;
 @end

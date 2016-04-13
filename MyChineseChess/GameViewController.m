@@ -59,7 +59,7 @@
         for (int colum=1; colum<=ChessBoardColums; colum++) {
             for (int row = 1 ; row<=ChessBoardRows; row++) {
                 NSString *key = [NSString stringWithFormat:@"(%d,%d)",row,colum];
-                CGPoint p = CGPointFromString((NSString*)[_gameChessBoard.coordinateDictionay objectForKey:key]);
+                CGPoint p = [_gameChessBoard.coordinateDictionay objectForKey:key].absolutPoint;
                 BaseChess *chess;
                 
                 if (row==1) {
@@ -146,8 +146,8 @@
                     }
                 }
                 if (chess) {
+                    chess.relativeLocation = [_gameChessBoard.coordinateDictionay objectForKey:key];
                     chess.chessDelage = self;
-                    chess.chessCoordinateString = key;
                     chess.uiExhition.frame = CGRectMake(p.x-_gameChessBoard.chessSize.width/2, p.y-_gameChessBoard.chessSize.height/2, _gameChessBoard.chessSize.width, _gameChessBoard.chessSize.height);
                     chess.uiExhition.layer.cornerRadius = _gameChessBoard.chessSize.width/2;
                     [_gameChessBoard addSubview:chess.uiExhition];
@@ -159,20 +159,24 @@
     [_gameChessBoard setNeedsDisplay];
 }
 
+
+
 -(void)chessBoard:(ChessBoard*)chessBoard TouchCoordinationString:(NSString*)coordinate;
 {
     if ([self isExistChessInCoordinateString:coordinate]) {
         return;
     }
+    //无论如何先移除
+    ChessLocationModel *model = [chessBoard.coordinateDictionay objectForKey:coordinate];
     
-    
-    if (_currentChess) {
-       NSArray* keys  = [_chessMap allKeysForObject:_currentChess];
-        for (NSString *key in keys) {
-            [_chessMap removeObjectForKey:key];
-        }
-        [ _currentChess chess_move:CGPointFromString((NSString*)[chessBoard.coordinateDictionay objectForKey:coordinate])];
-        [_chessMap setObject:_currentChess forKey:coordinate];
+    if ([_currentChess chess_canMoveToLocation:model]) {
+        [_chessMap removeObjectForKey:_currentChess.relativeLocation.locationString];
+        [_currentChess chess_move:model];
+        [_chessMap setObject:_currentChess forKey:model.locationString];
+        _currentChess.uiExhition.selected = NO;
+        _currentChess = nil;
+    }else
+    {
         _currentChess.uiExhition.selected = NO;
         _currentChess = nil;
     }
@@ -184,9 +188,12 @@
     {
         _currentChess = chess;
         btn.selected = YES;
+        return;
     }else if(_currentChess==chess)//选中的还是自己;不做任何操作
     {
-        
+        btn.selected = NO;
+        _currentChess = nil;
+        return;
         
     }else if(_currentChess.campType==chess.campType)//点到自己其他棋子
     {
@@ -195,12 +202,26 @@
         _currentChess = chess;//改为选中最新的
     }else //吃子
     {
-        _currentChess.localtion = chess.localtion;//占据别人位置
-        _currentChess.chessCoordinateString = chess.chessCoordinateString;//占据位置
-        chess.isDeath = YES;//杀死目标棋子
-        [chess.uiExhition removeFromSuperview];//从棋盘上移除
-        chess.chessCoordinateString = nil;
-        [_gameChessBoard setNeedsDisplay];
+        //判断是否可以吃
+        if ([_currentChess chess_canMoveToLocation:chess.relativeLocation]) {
+            //吃子过程
+            chess.isDeath = YES;//杀死目标棋子
+            [chess.uiExhition removeFromSuperview];//从棋盘上移除
+            [_chessMap removeObjectForKey:_currentChess.relativeLocation.locationString];//移出map
+            //子落到位置
+            _currentChess.relativeLocation = chess.relativeLocation;
+            //更新字典
+            [_chessMap setObject:_currentChess forKey:_currentChess.relativeLocation.locationString];
+            _currentChess.uiExhition.selected = NO;
+            
+            _currentChess = nil;
+        }else
+        {
+            _currentChess.uiExhition.selected = NO;
+            _currentChess = nil;
+            
+        }
+       
     }
     
     

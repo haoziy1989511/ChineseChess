@@ -45,4 +45,27 @@
 {
     return pAttackType;
 }
+-(BOOL)chess_canMoveToLocation:(ChessLocationModel *)location
+{
+    if (abs(self.relativeLocation.row-location.row)+abs(self.relativeLocation.column-location.column)<2)
+    {
+        if (location.column>=4&&location.column<=6) {
+            if (self.campType == campTypeRed) {
+                return location.row>=8&&location.row<=10;
+            }else
+            {
+                return location.row>=1&&location.row<=3;
+            }
+            
+        }else{
+            return NO;
+        }
+        
+    }else
+    {
+        return NO;
+    }
+    
+    
+}
 @end

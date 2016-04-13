@@ -8,6 +8,7 @@
 
 #import "ChessBoard.h"
 
+
 @interface ChessBoard()
 {
     CGFloat horizonGap;
@@ -34,11 +35,9 @@
         verticalGap = frame.size.width/(ChessBoardRows+1);//9根线,10各区间;//竖直间距跟行数相关
         for (int row=1; row<=ChessBoardRows;row++) {
             for (int cloum=1; cloum<=ChessBoardColums; cloum++) {
-                
-                NSString *key = [NSString stringWithFormat:@"(%d,%d)",row,cloum];
-                
                 CGPoint p = CGPointMake(horizonGap*cloum, verticalGap*row);
-                [_coordinateDictionay setObject:NSStringFromCGPoint(p) forKey:key];
+                ChessLocationModel *model = [[ChessLocationModel alloc]initWithRow:row colum:cloum absoluteLocation:p];
+                [_coordinateDictionay setObject:model forKey:model.locationString];
             }
         }
     }
@@ -74,37 +73,37 @@
     for(int cloum = 1;cloum<=ChessBoardColums;cloum++)
     {
         NSString *keyBegin = [NSString stringWithFormat:@"(1,%d)",cloum];
-        CGPoint pBegin = CGPointFromString((NSString*)[_coordinateDictionay objectForKey:keyBegin]);
+        
+        
+        CGPoint pBegin = [_coordinateDictionay objectForKey:keyBegin].absolutPoint;
         CGContextMoveToPoint(context,pBegin.x,pBegin.y);
         
         if (cloum==1||cloum==ChessBoardColums)//第一条最后一条封闭
         {
             NSString *keyEnd = [NSString stringWithFormat:@"(%d,%d)",(int)ChessBoardRows,cloum];
             
-            CGPoint pEnd = CGPointFromString((NSString*)[_coordinateDictionay objectForKey:keyEnd]);
+            CGPoint pEnd = [_coordinateDictionay objectForKey:keyEnd].absolutPoint;
             CGContextAddLineToPoint(context,pEnd.x,pEnd.y);
-            //             CGContextStrokePath(context);
         }
         else
         {
             NSString *keyEnd = [NSString stringWithFormat:@"(%d,%d)",(int)ChessBoardRows/2,cloum];
             
-            CGPoint pEnd = CGPointFromString((NSString*)[_coordinateDictionay objectForKey:keyEnd]);
+            CGPoint pEnd = [_coordinateDictionay objectForKey:keyEnd].absolutPoint;
             CGContextAddLineToPoint(context,pEnd.x,pEnd.y);
-            //             CGContextStrokePath(context);
+        
             //
             NSString *keyBegin2 = [NSString stringWithFormat:@"(%d,%d)",(int)ChessBoardRows/2+1,cloum];
             
-            CGPoint pBegin2 = CGPointFromString((NSString*)[_coordinateDictionay objectForKey:keyBegin2]);
+            CGPoint pBegin2 = [_coordinateDictionay objectForKey:keyBegin2].absolutPoint;
             CGContextMoveToPoint(context,pBegin2.x,pBegin2.y);
             
             
             //
             NSString *keyEnd2 = [NSString stringWithFormat:@"(%d,%d)",(int)ChessBoardRows,cloum];
             
-            CGPoint pEnd2 = CGPointFromString((NSString*)[_coordinateDictionay objectForKey:keyEnd2]);
+            CGPoint pEnd2 = [_coordinateDictionay objectForKey:keyEnd2].absolutPoint;
             CGContextAddLineToPoint(context,pEnd2.x,pEnd2.y);
-            //             CGContextStrokePath(context);
         }
         CGContextStrokePath(context);
         
@@ -113,9 +112,9 @@
     //画九宫
     NSString *beginKey1 = @"(1,4)";//1行4列
     NSString *endKey1 = @"(3,6)";//3行6列
-    CGPoint endP1 = CGPointFromString((NSString*)[_coordinateDictionay objectForKey:endKey1]);
+    CGPoint endP1 = [_coordinateDictionay objectForKey:beginKey1].absolutPoint;
     
-    CGPoint beginP1 = CGPointFromString((NSString*)[_coordinateDictionay objectForKey:beginKey1]);
+    CGPoint beginP1 = [_coordinateDictionay objectForKey:endKey1].absolutPoint;
     CGContextMoveToPoint(context, beginP1.x, beginP1.y);
     
     CGContextAddLineToPoint(context,endP1.x , endP1.y);
@@ -124,9 +123,9 @@
     
     NSString *beginKey2 = @"(3,4)";//3行4列
     NSString *endKey2 = @"(1,6)";//1行6列
-    CGPoint endP2 = CGPointFromString((NSString*)[_coordinateDictionay objectForKey:endKey2]);
+    CGPoint endP2 = [_coordinateDictionay objectForKey:endKey2].absolutPoint;
     
-    CGPoint beginP2 = CGPointFromString((NSString*)[_coordinateDictionay objectForKey:beginKey2]);
+    CGPoint beginP2 = [_coordinateDictionay objectForKey:beginKey2].absolutPoint;
     CGContextMoveToPoint(context, beginP2.x, beginP2.y);
     
     CGContextAddLineToPoint(context,endP2.x , endP2.y);
@@ -135,9 +134,9 @@
     
     NSString *beginKey3 = @"(10,4)";//10行4列
     NSString *endKey3 = @"(8,6)";//8行6列
-    CGPoint endP3 = CGPointFromString((NSString*)[_coordinateDictionay objectForKey:endKey3]);
+    CGPoint endP3 = [_coordinateDictionay objectForKey:endKey3].absolutPoint;;
     
-    CGPoint beginP3 = CGPointFromString((NSString*)[_coordinateDictionay objectForKey:beginKey3]);
+    CGPoint beginP3 = [_coordinateDictionay objectForKey:beginKey3].absolutPoint;
     CGContextMoveToPoint(context, beginP3.x, beginP3.y);
     
     CGContextAddLineToPoint(context,endP3.x , endP3.y);
@@ -146,9 +145,9 @@
     
     NSString *beginKey4 = @"(8,4)";//8行4列
     NSString *endKey4 = @"(10,6)";//10行6列
-    CGPoint endP4 = CGPointFromString((NSString*)[_coordinateDictionay objectForKey:endKey4]);
+    CGPoint endP4 = [_coordinateDictionay objectForKey:endKey4].absolutPoint;
     
-    CGPoint beginP4 = CGPointFromString((NSString*)[_coordinateDictionay objectForKey:beginKey4]);
+    CGPoint beginP4 = [_coordinateDictionay objectForKey:beginKey4].absolutPoint;
     CGContextMoveToPoint(context, beginP4.x, beginP4.y);
     
     CGContextAddLineToPoint(context,endP4.x , endP4.y);

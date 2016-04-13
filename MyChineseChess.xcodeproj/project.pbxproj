@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		05ED510A1CBDE80E0013162D /* ChessBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED51091CBDE80E0013162D /* ChessBoard.m */; };
 		05ED510D1CBE375C0013162D /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED510C1CBE375C0013162D /* GameViewController.m */; };
+		184546071CBE63DA00905AF9 /* ChessLocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 184546061CBE63DA00905AF9 /* ChessLocationModel.m */; };
 		18B1A5261CBD317100E74AB7 /* PrimeMinisterChess.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1A5251CBD317100E74AB7 /* PrimeMinisterChess.m */; };
 		18B1A5291CBD326B00E74AB7 /* SoldierChess.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1A5281CBD326B00E74AB7 /* SoldierChess.m */; };
 		18B1A52C1CBD335500E74AB7 /* GunFireChess.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1A52B1CBD335500E74AB7 /* GunFireChess.m */; };
@@ -49,6 +50,8 @@
 		05ED51091CBDE80E0013162D /* ChessBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChessBoard.m; sourceTree = "<group>"; };
 		05ED510B1CBE375C0013162D /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		05ED510C1CBE375C0013162D /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		184546051CBE63DA00905AF9 /* ChessLocationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChessLocationModel.h; sourceTree = "<group>"; };
+		184546061CBE63DA00905AF9 /* ChessLocationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChessLocationModel.m; sourceTree = "<group>"; };
 		18B1A5241CBD317100E74AB7 /* PrimeMinisterChess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrimeMinisterChess.h; sourceTree = "<group>"; };
 		18B1A5251CBD317100E74AB7 /* PrimeMinisterChess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrimeMinisterChess.m; sourceTree = "<group>"; };
 		18B1A5271CBD326B00E74AB7 /* SoldierChess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoldierChess.h; sourceTree = "<group>"; };
@@ -116,6 +119,8 @@
 				05ED51091CBDE80E0013162D /* ChessBoard.m */,
 				05ED510B1CBE375C0013162D /* GameViewController.h */,
 				05ED510C1CBE375C0013162D /* GameViewController.m */,
+				184546051CBE63DA00905AF9 /* ChessLocationModel.h */,
+				184546061CBE63DA00905AF9 /* ChessLocationModel.m */,
 			);
 			name = GameControl;
 			sourceTree = "<group>";
@@ -406,6 +411,7 @@
 				18B1A5291CBD326B00E74AB7 /* SoldierChess.m in Sources */,
 				18CC23EE1CBD2336004C5A76 /* ViewController.m in Sources */,
 				18B1A5321CBD344900E74AB7 /* CarChess.m in Sources */,
+				184546071CBE63DA00905AF9 /* ChessLocationModel.m in Sources */,
 				18B1A52C1CBD335500E74AB7 /* GunFireChess.m in Sources */,
 				18CC24261CBD29FA004C5A76 /* KingChess.m in Sources */,
 				18B1A5361CBD352800E74AB7 /* ChessPlayer.m in Sources */,

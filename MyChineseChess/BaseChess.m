@@ -10,19 +10,17 @@
 
 @implementation BaseChess
 
--(void)chess_move:(CGPoint)targetLocation;//移动方法
+-(void)chess_move:(ChessLocationModel*)targetLocation;//移动方法
 {
-    self.localtion = targetLocation;
-    self.uiExhition.center = targetLocation;
+    _relativeLocation = targetLocation;
+    self.uiExhition.center = targetLocation.absolutPoint;
 }
-
-
--(void)setLocaltion:(CGPoint)localtion
+-(void)setRelativeLocation:(ChessLocationModel *)relativeLocation
 {
-    _localtion = localtion;
-    self.uiExhition.center = localtion;
+    _relativeLocation = relativeLocation;
+    self.uiExhition.center = relativeLocation.absolutPoint;
 }
--(BOOL)chess_canMoveToLocation:(CGPoint)location;
+-(BOOL)chess_canMoveToLocation:(ChessLocationModel*)location;
 {
     return NO;
 }
@@ -31,7 +29,6 @@
     self = [super init];
     if (self) {
         _campType = camp;
-        _localtion = initPosition;
         _uiExhition  = [[UIButton alloc]init];
         if (camp==campTypeRed) {
             _uiExhition.backgroundColor = [UIColor purpleColor];
