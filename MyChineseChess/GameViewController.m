@@ -147,6 +147,7 @@
                 }
                 if (chess) {
                     chess.chessDelage = self;
+                    chess.chessCoordinateString = key;
                     chess.uiExhition.frame = CGRectMake(p.x-_gameChessBoard.chessSize.width/2, p.y-_gameChessBoard.chessSize.height/2, _gameChessBoard.chessSize.width, _gameChessBoard.chessSize.height);
                     chess.uiExhition.layer.cornerRadius = _gameChessBoard.chessSize.width/2;
                     [_gameChessBoard addSubview:chess.uiExhition];
@@ -160,13 +161,54 @@
 
 -(void)chessBoard:(ChessBoard*)chessBoard TouchCoordinationString:(NSString*)coordinate;
 {
+    if ([self isExistChessInCoordinateString:coordinate]) {
+        return;
+    }
+    
+    
     if (_currentChess) {
+       NSArray* keys  = [_chessMap allKeysForObject:_currentChess];
+        for (NSString *key in keys) {
+            [_chessMap removeObjectForKey:key];
+        }
         [ _currentChess chess_move:CGPointFromString((NSString*)[chessBoard.coordinateDictionay objectForKey:coordinate])];
+        [_chessMap setObject:_currentChess forKey:coordinate];
+        _currentChess.uiExhition.selected = NO;
+        _currentChess = nil;
     }
 }
 -(void)chess:(BaseChess*)chess uiBeClicked:(UIButton*)btn;
 {
-    _currentChess = chess;
+    //1:在没有选中棋子的情况下;点击棋子视为选中;
+    if(_currentChess==nil)
+    {
+        _currentChess = chess;
+        btn.selected = YES;
+    }else if(_currentChess==chess)//选中的还是自己;不做任何操作
+    {
+        
+        
+    }else if(_currentChess.campType==chess.campType)//点到自己其他棋子
+    {
+        btn.selected = YES;
+        _currentChess.uiExhition.selected = NO;//原来的棋子放弃选中
+        _currentChess = chess;//改为选中最新的
+    }else //吃子
+    {
+        _currentChess.localtion = chess.localtion;//占据别人位置
+        _currentChess.chessCoordinateString = chess.chessCoordinateString;//占据位置
+        chess.isDeath = YES;//杀死目标棋子
+        [chess.uiExhition removeFromSuperview];//从棋盘上移除
+        chess.chessCoordinateString = nil;
+        [_gameChessBoard setNeedsDisplay];
+    }
+    
+    
+    
+}
+-(BOOL)isExistChessInCoordinateString:(NSString*)coordinateString
+{
+    return [_chessMap objectForKey:coordinateString]!=nil;
 }
 -(void)play
 {

@@ -47,6 +47,7 @@ typedef NS_ENUM(NSInteger,ChessFunctionType)//棋子功能类型
 @property(nonatomic,assign,readonly)ChessCampType campType;//阵营
 @property(nonatomic,assign,readonly)ChessFunctionType functionType;//功能
 @property(nonatomic,copy,readonly)NSString *chessName;//名字
+@property(nonatomic,copy)NSString *chessCoordinateString;//棋子在棋盘中的坐标;
 @property(nonatomic,assign,readonly)ChessAttackType attackType;//功能，进攻型\防守型
 @property(nonatomic,assign)CGPoint localtion;//位置
 @property(nonatomic,assign)BOOL isDeath;//是否已经死亡
