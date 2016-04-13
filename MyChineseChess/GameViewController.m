@@ -54,7 +54,7 @@
     if (_chessMap.allKeys.count>0) {
         return;
     }
-    if(_gameChessBoard.coordinateDictionay)
+    if(_gameChessBoard.coordinateDictionay.allKeys.count>0)
     {
         for (int colum=1; colum<=ChessBoardColums; colum++) {
             for (int row = 1 ; row<=ChessBoardRows; row++) {
@@ -155,6 +155,7 @@
             }
         }
     }
+    [_gameChessBoard setNeedsDisplay];
 }
 
 -(void)chessBoard:(ChessBoard*)chessBoard TouchCoordinationString:(NSString*)coordinate;

@@ -27,12 +27,12 @@
         _localtion = initPosition;
         _uiExhition  = [[UIButton alloc]init];
         if (camp==campTypeRed) {
-//            _uiExhition.backgroundColor = [UIColor purpleColor];
+            _uiExhition.backgroundColor = [UIColor purpleColor];
             [_uiExhition setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
         }else
         {
             [_uiExhition setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//            _uiExhition.backgroundColor = [UIColor grayColor];
+            _uiExhition.backgroundColor = [UIColor grayColor];
         }
         [_uiExhition addTarget:self action:@selector(clicked:) forControlEvents:UIControlEventTouchUpInside];
         [self setup];

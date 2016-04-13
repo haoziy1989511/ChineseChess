@@ -30,9 +30,17 @@
     self = [super initWithFrame:frame];
     if (self) {
         _coordinateDictionay = [[NSMutableDictionary alloc]init];
-//        CGContextRef  context = UIGraphicsGetCurrentContext();
-//        [self cutomerContex:context Draw:self.bounds];
-////        [self cutomerDraw:self.bounds];
+        horizonGap = frame.size.height/(ChessBoardColums+1);//10跟线,11个区间;水平间距,跟列数相关
+        verticalGap = frame.size.width/(ChessBoardRows+1);//9根线,10各区间;//竖直间距跟行数相关
+        for (int row=1; row<=ChessBoardRows;row++) {
+            for (int cloum=1; cloum<=ChessBoardColums; cloum++) {
+                
+                NSString *key = [NSString stringWithFormat:@"(%d,%d)",row,cloum];
+                
+                CGPoint p = CGPointMake(horizonGap*cloum, verticalGap*row);
+                [_coordinateDictionay setObject:NSStringFromCGPoint(p) forKey:key];
+            }
+        }
     }
     return self;
 }
@@ -49,22 +57,13 @@
 
 -(void)cutomerContex:(CGContextRef)context Draw:(CGRect)rect
 {
-    horizonGap = rect.size.height/(ChessBoardColums+1);//10跟线,11个区间;水平间距,跟列数相关
-    verticalGap = rect.size.width/(ChessBoardRows+1);//9根线,10各区间;//竖直间距跟行数相关
+    if(_coordinateDictionay.allKeys.count==0)
+    {
+        return;
+    }
+
     CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
     CGContextSetLineWidth(context, 1);
-    
-    for (int row=1; row<=ChessBoardRows;row++) {
-        for (int cloum=1; cloum<=ChessBoardColums; cloum++) {
-            
-            NSString *key = [NSString stringWithFormat:@"(%d,%d)",row,cloum];
-            
-            CGPoint p = CGPointMake(horizonGap*cloum, verticalGap*row);
-            [_coordinateDictionay setObject:NSStringFromCGPoint(p) forKey:key];
-            
-            
-        }
-    }
     //画行
     for (int row=1 ; row<=ChessBoardRows; row++) {
         CGContextMoveToPoint(context, horizonGap, verticalGap*row);

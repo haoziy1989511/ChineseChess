@@ -37,10 +37,12 @@
 -(void)test:(UIButton*)b
 {
     ChessBoard *gameChessBoard = [[ChessBoard alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.width)];
-
     gameChessBoard.backgroundColor = [UIColor whiteColor];
     GameViewController *game = [[GameViewController alloc]initWithChessBoard:gameChessBoard];
-    [self.navigationController pushViewController:game animated:YES];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.navigationController pushViewController:game animated:YES];
+    });
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
