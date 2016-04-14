@@ -20,20 +20,84 @@
 {
     self = [super init];
     if (self) {
-        _recordOrder = recordOrder;
-        _chessName = chess.chessName;
-        _chessColumn = chess.relativeLocation.column;
-        _stepLength = abs(location.row-chess.relativeLocation.row);
+        _recordOrder = recordOrder;//顺序执行
+        _chessName = chess.chessName;//名字
+        _chessColumn = chess.relativeLocation.column;//列
+        if (location.column==chess.relativeLocation.column) {
+             _stepLength = abs(location.row-chess.relativeLocation.row);//步长
+        }else
+        {
+             _stepLength = abs(location.column-chess.relativeLocation.column);//步长
+        }
+        
+       
+        if (chess.relativeLocation.row==location.row)//行相同,则平
+        {
+            if(chess.relativeLocation.column>location.column)
+            {
+                _chessMoveType = ChessTextMoveLeft;//左平
+            }else
+            {
+                _chessMoveType = ChessTextMoveRight;//右平
+            }
+        }else
+        {
+            if (chess.relativeLocation.row>location.row)//行减少;
+            {
+                _chessMoveType = ChessTextMoveUp ;//行减少了;往棋盘上方移动
+            }else
+            {
+                _chessMoveType =  ChessTextMoveDown;//行增加;棋盘下方移动
+            }
+        }
     }
     return self;
 }
 
 -(NSString*)chessTextString
 {
-    if (_recordOrder%2==1)//红棋回合产生;
-    {
-        
+    
+    return [NSString stringWithFormat:@"%@%@%@%@",_chessName,[self chineseNameMapOrder:_recordOrder number:_chessColumn],[self forwardOrBack:_chessMoveType],[self chineseNameMapOrder:_recordOrder number:_stepLength]];
+}
+
+-(NSString*)forwardOrBack:(ChessTextMoveTpye)type
+{
+    
+    switch (type) {
+        case ChessTextMoveUp:
+        {
+            if (_recordOrder%2==1)//红棋往上方移动是 进 反之 退
+            {
+                return  @"进";
+            }else
+            {
+                return @"退";
+            }
+        }
+            break;
+        case ChessTextMoveDown:
+        {
+            if (_recordOrder%2==0)//黑棋往下方移动 是进 反之 退
+            {
+                return  @"进";
+            }else
+            {
+                return @"退";
+            }
+        }
+        case ChessTextMoveRight:
+        {
+            return @"平";
+        }
+        case ChessTextMoveLeft:
+        {
+            return @"平";
+        }
+        default:
+            return nil;
+            break;
     }
+
 }
 
 -(NSString*)chineseNameMapOrder:(int)order number:(uint)number;

@@ -15,11 +15,14 @@
 #import "GunFireChess.h"
 #import "SoldierChess.h"
 #import "ChessBoard.h"
+#import "ChessTextRecord.h"
 
 @interface GameViewController()<ChessBoardDelegate,BaseChessDelegate>
 {
     ChessCampType currentMoveCamp;//当前行棋阵营;默认是红色
     UIView *controlPane;//控制面板;
+    NSMutableArray<ChessTextRecord*> *chessTextArr;
+    int gameOrder;//游戏回合
 }
 
 @end
@@ -34,6 +37,7 @@
         _gameChessBoard = chessBoard;
         _chessMap = [[NSMutableDictionary alloc]init];
         _orginChess = [[NSMutableArray alloc]init];
+        chessTextArr = [[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -46,6 +50,7 @@
 {
     [super viewDidLoad];
     _gameChessBoard.gameDelegate = self;
+    gameOrder = 1;
     CGFloat margin = 20;
     CGFloat btnWith = (self.view.frame.size.width-margin*2)/3;
     
@@ -231,13 +236,18 @@
         [_currentChess chess_move:model];
         [_chessMap setObject:_currentChess forKey:model.locationString];
         _currentChess.uiExhition.selected = NO;
+        ChessTextRecord *record = [[ChessTextRecord alloc]initWithOrder:gameOrder chess:_currentChess targetLocation:model];
+        NSLog(@"%@",[NSString stringWithFormat:@"%@\n",record.chessTextString]);
+        [chessTextArr addObject:record];
         if (currentMoveCamp == campTypeRed) {
             currentMoveCamp = campTypeBlack;
         }else
         {
             currentMoveCamp = campTypeRed;
         }
+        gameOrder++;
         _currentChess = nil;
+        
     }else
     {
         _currentChess.uiExhition.selected = NO;
@@ -296,12 +306,16 @@
             //更新字典
             [_chessMap setObject:_currentChess forKey:_currentChess.relativeLocation.locationString];
             _currentChess.uiExhition.selected = NO;
+            ChessTextRecord *record = [[ChessTextRecord alloc]initWithOrder:gameOrder chess:_currentChess targetLocation:chess.relativeLocation];
+            NSLog(@"%@",[NSString stringWithFormat:@"%@\n",record.chessTextString]);
+            [chessTextArr addObject:record];
             if (currentMoveCamp == campTypeRed) {
                 currentMoveCamp = campTypeBlack;
             }else
             {
                 currentMoveCamp = campTypeRed;
             }
+            gameOrder++;
             _currentChess = nil;
         }else
         {
