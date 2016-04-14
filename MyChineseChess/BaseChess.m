@@ -24,10 +24,14 @@
 {
     return NO;
 }
--(instancetype)initWithCamp:(ChessCampType)camp location:(CGPoint)initPosition;
+-(instancetype)initWithCamp:(ChessCampType)camp location:(ChessLocationModel*)initPosition chessSize:(CGSize)chessSize;
 {
+    NSAssert(initPosition!=nil, @"不能用空的位置对象初始化");
+    NSAssert(chessSize.width!=0||chessSize.height!=0, @"棋子大小不能为0");
     self = [super init];
     if (self) {
+        _originRelativeLocation = initPosition;
+        _relativeLocation = initPosition;
         _campType = camp;
         _uiExhition  = [[UIButton alloc]init];
         if (camp==campTypeRed) {
@@ -40,9 +44,16 @@
         }
          [_uiExhition setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         [_uiExhition addTarget:self action:@selector(clicked:) forControlEvents:UIControlEventTouchUpInside];
+        _uiExhition.frame = CGRectMake(initPosition.absolutPoint.x-chessSize.width/2, initPosition.absolutPoint.y-chessSize.height/2, chessSize.width, chessSize.height);
+        _uiExhition.layer.cornerRadius = chessSize.width/2;
         [self setup];
     }
     return self;
+}
+-(void)resetToOrigin;
+{
+    self.uiExhition.selected = NO;
+    self.relativeLocation = self.originRelativeLocation;
 }
 /**
  *  点击棋子,视为选中自己,或者吃掉别人棋子

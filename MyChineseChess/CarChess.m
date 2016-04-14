@@ -34,4 +34,8 @@
 {
     return pAttackType;
 }
+-(BOOL)chess_canMoveToLocation:(ChessLocationModel *)location
+{
+    return (self.relativeLocation.row==location.row||self.relativeLocation.column==location.column);
+}
 @end

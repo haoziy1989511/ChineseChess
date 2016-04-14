@@ -224,4 +224,18 @@
 {
     
 }
+-(void)prepareForPlay;//摆放棋子
+{
+    if([_gameDelegate respondsToSelector:@selector(chessBoardPrepareForPlay:)])
+    {
+        [_gameDelegate chessBoardPrepareForPlay:self];
+    }
+}
+
+-(void)resetChesses;//重置棋子;
+{
+    if ([_gameDelegate respondsToSelector:@selector(chessBoardResetChesses:)]) {
+        [_gameDelegate chessBoardResetChesses:self];
+    }
+}
 @end

@@ -39,4 +39,19 @@
 {
     return pAttackType;
 }
+-(BOOL)chess_canMoveToLocation:(ChessLocationModel *)location
+{
+    //;距离都必须是2
+    if (abs(location.row-self.relativeLocation.row)==2&&abs(self.relativeLocation.column-location.column)==2) {
+        if (self.campType==campTypeRed) {
+            return location.row>=6;
+        }else
+        {
+            return location.row<=5;
+        }
+    }else
+    {
+        return NO;
+    }
+}
 @end

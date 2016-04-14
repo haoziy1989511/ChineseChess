@@ -14,7 +14,20 @@
 @protocol BaseChessDelegate <NSObject>
 
 -(void)chess:(BaseChess*)chess uiBeClicked:(UIButton*)btn;
-
+/**
+ *  移动
+ *
+ *  @param chess    要移动的棋子
+ *  @param location 目标位置
+ */
+-(void)chess:(BaseChess*)chess moveToLocation:(ChessLocationModel*)location;
+/**
+ *  吃子
+ *
+ *  @param chess       要行动的棋子
+ *  @param targetChess 要被吃掉的棋子
+ */
+-(void)chess:(BaseChess*)chess eateChess:(BaseChess*)targetChess;
 @end
 
 
@@ -48,14 +61,19 @@ typedef NS_ENUM(NSInteger,ChessFunctionType)//棋子功能类型
 @property(nonatomic,assign,readonly)ChessCampType campType;//阵营
 @property(nonatomic,assign,readonly)ChessFunctionType functionType;//功能
 @property(nonatomic,copy,readonly)NSString *chessName;//名字
-@property(nonatomic,assign,readonly)ChessAttackType attackType;//功能，进攻型\防守型
-@property(nonatomic,strong)ChessLocationModel *relativeLocation;//位置对象
+@property(nonatomic,assign,readonly)ChessAttackType attackType;//进攻型\防守型
+@property(nonatomic,copy)ChessLocationModel *relativeLocation;//位置对象
+@property(nonatomic,copy,readonly) ChessLocationModel *originRelativeLocation;//棋子原始位置,便于一键复位
 @property(nonatomic,assign)BOOL isDeath;//是否已经死亡
 @property(nonatomic,readonly,strong)UIButton *uiExhition;//棋子的UI呈现
 @property(nonatomic,weak) id<BaseChessDelegate> chessDelage;
 
 -(void)chess_move:(ChessLocationModel*)targetLocation;//移动方法
--(BOOL)chess_canMoveToLocation:(ChessLocationModel*)location;
--(instancetype)initWithCamp:(ChessCampType)camp location:(CGPoint)initPosition;
+-(BOOL)chess_canMoveToLocation:(ChessLocationModel*)location;//只包含几何关系的判断;例如车走直线,但是不能判断中间都阻挡;相走田也不能判断相眼是否被塞;
+-(instancetype)initWithCamp:(ChessCampType)camp location:(ChessLocationModel*)initPosition chessSize:(CGSize)chessSize;
+-(void)resetToOrigin;
 -(void)setup;
+
+-(void)move;
+-(void)eatChess:(BaseChess*)target;
 @end

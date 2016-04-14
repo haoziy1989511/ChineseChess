@@ -34,14 +34,6 @@
 {
     _campType = camp;
     _chessMap = [[NSMutableDictionary alloc]init];
-//    _kingChess = [[NSMutableDictionary alloc]init];
-//    _guardChess = [[NSMutableDictionary alloc]init];
-//    _primeMinisterChess = [[NSMutableDictionary alloc]init];
-//    _horseChess = [[NSMutableDictionary alloc]init];
-//    _carChess = [[NSMutableDictionary alloc]init];
-//    _guardChess = [[NSMutableDictionary alloc]init];
-//    _soldierChess = [[NSMutableDictionary alloc]init];
-
 }
 
 @end
