@@ -23,7 +23,8 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 64, 60, 44)];
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 60)];
+    btn.center = self.view.center;
     [btn setTitle:@"开战" forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(test:) forControlEvents:UIControlEventTouchUpInside];
@@ -36,7 +37,7 @@
 }
 -(void)test:(UIButton*)b
 {
-    ChessBoard *gameChessBoard = [[ChessBoard alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.width)];
+    ChessBoard *gameChessBoard = [[ChessBoard alloc]initWithFrame:CGRectMake(0, 44+64, self.view.frame.size.width-100, self.view.frame.size.width-100)];
     gameChessBoard.backgroundColor = [UIColor whiteColor];
     GameViewController *game = [[GameViewController alloc]initWithChessBoard:gameChessBoard];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

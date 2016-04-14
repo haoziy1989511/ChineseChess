@@ -18,9 +18,9 @@
 
 
 @implementation KingChess
--(instancetype)initWithCamp:(ChessCampType)camp location:(CGPoint)initPosition
+-(instancetype)initWithCamp:(ChessCampType)camp location:(ChessLocationModel*)initPosition chessSize:(CGSize)chessSize;
 {
-    self = [super initWithCamp:camp location:initPosition];
+    self = [super initWithCamp:camp location:initPosition chessSize:chessSize];
     if (self) {
         [self setup];
     }

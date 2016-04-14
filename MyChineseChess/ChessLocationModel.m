@@ -23,7 +23,7 @@
 
 -(instancetype)init
 {
-    assert(@"You Should Use initWithrelativeX:(int)relativeX relativeY:(int)relativeY absoluteLocation:(CGPoint)absolutPosition init an instance");
+    assert(@"You Should Use initWithRow:(int)row colum:(int)column absoluteLocation:(CGPoint)absolutPosition init an instance");
     return nil;
 }
 
