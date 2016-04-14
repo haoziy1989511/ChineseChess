@@ -232,13 +232,12 @@
     ChessLocationModel *model = [chessBoard.coordinateDictionay objectForKey:coordinate];
     
     if ([self chess:_currentChess isCanLocationTo:model]) {
+        [self createChessText:_currentChess location:model];
         [_chessMap removeObjectForKey:_currentChess.relativeLocation.locationString];
         [_currentChess chess_move:model];
         [_chessMap setObject:_currentChess forKey:model.locationString];
         _currentChess.uiExhition.selected = NO;
-        ChessTextRecord *record = [[ChessTextRecord alloc]initWithOrder:gameOrder chess:_currentChess targetLocation:model];
-        NSLog(@"%@",[NSString stringWithFormat:@"%@\n",record.chessTextString]);
-        [chessTextArr addObject:record];
+        
         if (currentMoveCamp == campTypeRed) {
             currentMoveCamp = campTypeBlack;
         }else
@@ -297,6 +296,8 @@
         }
         //判断是否可以吃
         if ([self chess:_currentChess isCanLocationTo:chess.relativeLocation]) {
+            
+            [self createChessText:_currentChess location:chess.relativeLocation];
             //吃子过程
             chess.isDeath = YES;//杀死目标棋子
             [chess.uiExhition removeFromSuperview];//从棋盘上移除
@@ -306,9 +307,7 @@
             //更新字典
             [_chessMap setObject:_currentChess forKey:_currentChess.relativeLocation.locationString];
             _currentChess.uiExhition.selected = NO;
-            ChessTextRecord *record = [[ChessTextRecord alloc]initWithOrder:gameOrder chess:_currentChess targetLocation:chess.relativeLocation];
-            NSLog(@"%@",[NSString stringWithFormat:@"%@\n",record.chessTextString]);
-            [chessTextArr addObject:record];
+            
             if (currentMoveCamp == campTypeRed) {
                 currentMoveCamp = campTypeBlack;
             }else
@@ -496,6 +495,181 @@
         }
     }
     return NO;
+}
+-(void)createChessText:(BaseChess*)chess location:(ChessLocationModel*)location
+{
+    //判断该子所在列，有没有跟自己一样并且一个阵营的子；
+    int brotherCount = 0;
+    NSInteger index = 0;
+    NSMutableArray *arr = [[NSMutableArray alloc]init];
+    for (int row=1; row<=ChessBoardRows; row++)//从顶部开始扫描。扫描到；数组索引越靠后的越在棋盘下
+    {
+        NSString *key = [NSString stringWithFormat:@"(%d,%d)",row,chess.relativeLocation.column];
+        BaseChess *brotherChess = (BaseChess*)[_chessMap objectForKey:key];
+        if (brotherChess.campType==chess.campType&&brotherChess.functionType==chess.functionType){
+            brotherCount++;
+            if (row==chess.relativeLocation.row) {
+                index = arr.count;//找到在数组中的下标，这是从下到上的位置索引，
+            }
+            [arr addObject:brotherChess];
+        }
+    
+    }
+    ChesstextAmbiguous ambiogus = ChessTextAmbiguousNone;
+    switch (arr.count) {
+        case 1:
+        {
+            ambiogus = ChessTextAmbiguousNone;
+            break;
+        }
+        case 2:
+        {
+            //索引越大，越在棋盘下面；
+            if(index==0)//自己在前面；说明自己是在棋盘上方；
+            {
+                if (chess.campType==campTypeRed)//如果是红棋；则自己这个棋子是 前
+                {
+                    ambiogus  = ChessTextAmbiguousFront;
+                }else
+                {
+                    ambiogus = ChessTextAmbiguousBehind;
+                }
+            }else{
+                if (chess.campType==campTypeRed)//如果是红棋；则自己这个棋子是 前
+                {
+                    ambiogus  = ChessTextAmbiguousBehind;
+                }else
+                {
+                    ambiogus = ChessTextAmbiguousFront;
+                }
+            }
+        }
+            break;
+        case 3:
+        {
+            //查看棋子是棋盘的上方还是下方
+            if(index==0)//自己在前面；说明自己是在棋盘上方；
+            {
+                if (chess.campType==campTypeRed)//如果是红棋；则自己这个棋子是 前
+                {
+                    ambiogus  = ChessTextAmbiguousFront;
+                }else
+                {
+                    ambiogus = ChessTextAmbiguousBehind;
+                }
+            }else if (index==1)
+            {
+                ambiogus = ChessTextAmbiguousMiddle;
+            }else //最后一个。说明自己在最下方；
+            {
+                if (chess.campType==campTypeRed)//如果是红棋；则自己这个棋子是 前
+                {
+                    ambiogus  = ChessTextAmbiguousBehind;
+                }else
+                {
+                    ambiogus = ChessTextAmbiguousFront;
+                }
+            }
+        }
+            break;
+        case 4:
+        {
+            //查看棋子是棋盘的上方还是下方
+            if(index==0)//自己在前面；说明自己是在棋盘上方；
+            {
+                if (chess.campType==campTypeRed)//如果是红棋；则自己这个棋子是 前
+                {
+                    ambiogus  = ChessTextAmbiguousOne;
+                }else
+                {
+                    ambiogus = ChesstextAmbiguousFour;
+                }
+            }else if (index==1)
+            {
+                if (chess.campType==campTypeRed)//如果是红棋；则自己这个棋子是 前
+                {
+                    ambiogus  = ChessTextAmbiguousTwo;
+                }else
+                {
+                    ambiogus = ChesstextAmbiguousThree;
+                }
+            }else if(index==2)//最后一个。说明自己在最下方；
+            {
+                if (chess.campType==campTypeRed)//如果是红棋；则自己这个棋子是 前
+                {
+                    ambiogus  = ChesstextAmbiguousThree;
+                }else
+                {
+                    ambiogus = ChessTextAmbiguousTwo;
+                }
+            }else{
+                if (chess.campType==campTypeRed)//如果是红棋；则自己这个棋子是 前
+                {
+                    ambiogus  = ChesstextAmbiguousFour;
+                }else
+                {
+                    ambiogus = ChessTextAmbiguousOne;
+                }
+            }
+            
+        }
+            break;
+        case 5:
+        {
+            //查看棋子是棋盘的上方还是下方
+            if(index==0)//自己在前面；说明自己是在棋盘上方；
+            {
+                if (chess.campType==campTypeRed)//如果是红棋；则自己这个棋子是 前
+                {
+                    ambiogus  = ChessTextAmbiguousOne;
+                }else
+                {
+                    ambiogus = ChesstextAmbiguousFive;
+                }
+            }else if (index==1)
+            {
+                if (chess.campType==campTypeRed)//如果是红棋；则自己这个棋子是 前
+                {
+                    ambiogus  = ChessTextAmbiguousTwo;
+                }else
+                {
+                    ambiogus = ChesstextAmbiguousFour;
+                }
+            }else if(index==2)//最后一个。说明自己在最下方；
+            {
+                if (chess.campType==campTypeRed)//如果是红棋；则自己这个棋子是 前
+                {
+                    ambiogus  = ChesstextAmbiguousThree;
+                }else
+                {
+                    ambiogus = ChesstextAmbiguousThree;
+                }
+            }else if(index==3){
+                if (chess.campType==campTypeRed)//如果是红棋；则自己这个棋子是 前
+                {
+                    ambiogus  = ChesstextAmbiguousFour;
+                }else
+                {
+                    ambiogus = ChessTextAmbiguousTwo;
+                }
+            }else{
+                if (chess.campType==campTypeRed)//如果是红棋；则自己这个棋子是 前
+                {
+                    ambiogus  = ChesstextAmbiguousFive;
+                }else
+                {
+                    ambiogus = ChessTextAmbiguousOne;
+                }
+            }
+            
+        }
+        default:
+            break;
+    }
+    ChessTextRecord *record = [[ChessTextRecord alloc]initWithOrder:gameOrder chess:_currentChess targetLocation:location containAmgious:ambiogus];
+    NSLog(@"%@",[NSString stringWithFormat:@"%@\n",record.chessTextString]);
+    [chessTextArr addObject:record];
+    
 }
 -(void)play
 {

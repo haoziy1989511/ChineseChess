@@ -13,6 +13,22 @@
  */
 
 //
+typedef NS_ENUM(NSInteger,ChesstextAmbiguous)
+{
+    ChessTextAmbiguousNone = 1,//1->0->1-1不含歧义,原始数字->移位数->二进制数->最终数字
+    ChessTextAmbiguousFront = 1<<1,//1->1->10->2,前 后面一个兄弟类型
+    ChessTextAmbiguousBehind = 1<<2, //1->2->100->4 后 后面没有兄弟类型
+    
+    ChessTextAmbiguousMiddle = 1<<3, //1->3->1000->8 有三个在一条线上 才会出现
+    ChessTextAmbiguousOne = 1<<4,//1->4->10000->16 如果出现四个兵在一条线才会用一，二，三，四，五来表示
+    ChessTextAmbiguousTwo = 1<<5,//1->5->100000->32
+    ChesstextAmbiguousThree = 1<<6,//1->6->1000000->64
+    ChesstextAmbiguousFour = 1<<7,//1->7->10000000->128
+    
+    ChesstextAmbiguousFive = 1<<8,//1->8->100000000->256
+    
+};
+
 
 typedef NS_ENUM(NSInteger,ChessTextMoveTpye)
 {
@@ -36,6 +52,7 @@ typedef NS_ENUM(NSInteger,ChessTextMoveTpye)
 @property(nonatomic,assign,readonly)int chessColumnEnd;//
 @property(nonatomic,copy,readonly)NSString *chessTextString;//至关重要的Key;能否翻译成行棋,至关重要
 
--(instancetype)initWithOrder:(int)recordOrder chess:(BaseChess*)chess targetLocation:(ChessLocationModel*)location;
+//最后一个参数是检查是否含有模糊含义的；
+-(instancetype)initWithOrder:(int)recordOrder chess:(BaseChess*)chess targetLocation:(ChessLocationModel*)location containAmgious:(ChesstextAmbiguous)ambigous;//
 @end
 

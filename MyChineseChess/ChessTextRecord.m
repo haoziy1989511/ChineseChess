@@ -8,6 +8,14 @@
 
 #import "ChessTextRecord.h"
 
+@interface ChessTextRecord()
+{
+    int stepLength;//用于文字信息的
+    ChesstextAmbiguous isContaintAmbigous;//模糊含义；
+}
+
+@end
+
 @implementation ChessTextRecord
 
 -(instancetype)init
@@ -16,18 +24,23 @@
     return nil;
 }
 
--(instancetype)initWithOrder:(int)recordOrder chess:(BaseChess*)chess targetLocation:(ChessLocationModel*)location;
+-(instancetype)initWithOrder:(int)recordOrder chess:(BaseChess*)chess targetLocation:(ChessLocationModel*)location containAmgious:(ChesstextAmbiguous)ambigous;
 {
     self = [super init];
     if (self) {
         _recordOrder = recordOrder;//顺序执行
         _chessName = chess.chessName;//名字
-        _chessColumn = chess.relativeLocation.column;//列
-        if (location.column==chess.relativeLocation.column) {
-             _stepLength = abs(location.row-chess.relativeLocation.row);//步长
+        _chessColumnStart = chess.relativeLocation.column;//列
+        _chessRowStart = chess.relativeLocation.row;
+        _chessColumnEnd = location.column;
+        _chessRowEnd = location.row;
+        isContaintAmbigous = ambigous;
+        if (location.column==chess.relativeLocation.column)//只有车，或者炮会走到此情形
+        {
+            stepLength = abs(_chessRowEnd-_chessRowStart);
         }else
         {
-             _stepLength = abs(location.column-chess.relativeLocation.column);//步长
+            stepLength = _chessColumnEnd;
         }
         
        
@@ -56,8 +69,99 @@
 
 -(NSString*)chessTextString
 {
+    NSString *startName = nil;
+    if (_chessMoveType==ChessTextMoveLeft||_chessMoveType==ChessTextMoveRight) {
+        startName = [self horizonMoveMapStepLength:stepLength];
+    }else{
+        startName = [self chineseNameMapSteplength:stepLength];
+    }
     
-    return [NSString stringWithFormat:@"%@%@%@%@",_chessName,[self chineseNameMapOrder:_recordOrder number:_chessColumn],[self forwardOrBack:_chessMoveType],[self chineseNameMapOrder:_recordOrder number:_stepLength]];
+    switch (isContaintAmbigous) {
+        case ChessTextAmbiguousNone:
+        {
+            return [NSString stringWithFormat:@"%d.%@%@%@%@",_recordOrder,
+                    _chessName,
+                    [self chineseNameMapOrder:_recordOrder number:_chessColumnStart],
+                    [self forwardOrBack:_chessMoveType],
+                    startName];
+        }
+            break;
+        case ChessTextAmbiguousFront:
+        {
+            return [NSString stringWithFormat:@"%d.%@%@%@%@",
+                    _recordOrder,
+                    @"前",
+                    _chessName,
+                    [self forwardOrBack:_chessMoveType],
+                    startName];
+        }
+        case ChessTextAmbiguousBehind:
+        {
+            return [NSString stringWithFormat:@"%d.%@%@%@%@",
+                    _recordOrder,
+                    @"后",
+                    _chessName,
+                    [self forwardOrBack:_chessMoveType],
+                    [self chineseNameMapSteplength:stepLength]];
+        }
+        case ChessTextAmbiguousMiddle:
+        {
+            return [NSString stringWithFormat:@"%d.%@%@%@%@",
+                    _recordOrder,
+                    @"中",
+                    _chessName,
+                    [self forwardOrBack:_chessMoveType],
+                    startName];
+        }
+        case ChessTextAmbiguousOne:
+        {
+            return [NSString stringWithFormat:@"%d.%@%@%@%@",
+                    _recordOrder,
+                    [self chineseNameMapSteplength:1],
+                    _chessName,
+                    [self forwardOrBack:_chessMoveType],
+                    startName];
+        }
+        case ChessTextAmbiguousTwo:
+        {
+            return [NSString stringWithFormat:@"%d.%@%@%@%@",
+                    _recordOrder,
+                    [self chineseNameMapSteplength:2],
+                    _chessName,
+                    [self forwardOrBack:_chessMoveType],
+                    startName];
+        }
+        case ChesstextAmbiguousThree:
+        {
+            return [NSString stringWithFormat:@"%d.%@%@%@%@",
+                    _recordOrder,
+                    [self chineseNameMapSteplength:3],
+                    _chessName,
+                    [self forwardOrBack:_chessMoveType],
+                    startName];
+        }
+        case ChesstextAmbiguousFour:
+        {
+            return [NSString stringWithFormat:@"%d.%@%@%@%@",
+                    _recordOrder,
+                    [self chineseNameMapSteplength:4],
+                    _chessName,
+                    [self forwardOrBack:_chessMoveType],
+                    startName];
+        }
+        case ChesstextAmbiguousFive:
+        {
+            return [NSString stringWithFormat:@"%d.%@%@%@%@",
+                    _recordOrder,
+                    [self chineseNameMapSteplength:1],
+                    _chessName,
+                    [self forwardOrBack:_chessMoveType],
+                    startName];
+        }
+        default:
+            break;
+    }
+    
 }
 
 -(NSString*)forwardOrBack:(ChessTextMoveTpye)type
@@ -99,13 +203,81 @@
     }
 
 }
-
--(NSString*)chineseNameMapOrder:(int)order number:(uint)number;
+-(NSString*)horizonMoveMapStepLength:(uint)number//水平移动的左边映射
 {
     assert(number<=9&&number>0);
-    if (order%2==0)//红棋 返回大写中文
+    if (_recordOrder%2==1)//红棋 返回大写中文
+    {
+        switch (10-number) {
+            case 1:
+                return @"一";
+            case 2:
+                return @"二";
+            case 3:
+                return @"三";
+            case 4:
+                return @"四";
+            case 5:
+                return @"五";
+            case 6:
+                return @"六";
+            case 7:
+                return @"七";
+            case 8:
+                return @"八";
+            case 9:
+                return @"九";
+            default:
+                return nil;
+                break;
+        }
+    }else
+    {
+        return [NSString stringWithFormat:@"%d",number];
+    }
+}
+
+-(NSString*)chineseNameMapSteplength:(uint)number;//前进或者后退步长转化，实际切换
+{
+    assert(number<=9&&number>0);
+    if (_recordOrder%2==1)//红棋 返回大写中文
     {
         switch (number) {
+            case 1:
+                return @"一";
+            case 2:
+                return @"二";
+            case 3:
+                return @"三";
+            case 4:
+                return @"四";
+            case 5:
+                return @"五";
+            case 6:
+                return @"六";
+            case 7:
+                return @"七";
+            case 8:
+                return @"八";
+            case 9:
+                return @"九";
+            default:
+                return nil;
+                break;
+        }
+    }else
+    {
+        return [NSString stringWithFormat:@"%d",number];
+    }
+}
+
+
+-(NSString*)chineseNameMapOrder:(int)order number:(uint)number;//列转化，红方的坐标系要逆转
+{
+    assert(number<=9&&number>0);
+    if (order%2==1)//红棋 返回大写中文
+    {
+        switch (10-number) {
             case 1:
                 return @"一";
             case 2:
