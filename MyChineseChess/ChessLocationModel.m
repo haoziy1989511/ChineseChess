@@ -20,7 +20,11 @@
     }
     return self;
 }
-
+- (id)copyWithZone:(nullable NSZone *)zone;
+{
+    ChessLocationModel *model = [[ChessLocationModel allocWithZone:zone]initWithRow:self.row colum:self.column absoluteLocation:self.absolutPoint];
+    return model;
+}
 -(instancetype)init
 {
     assert(@"You Should Use initWithRow:(int)row colum:(int)column absoluteLocation:(CGPoint)absolutPosition init an instance");

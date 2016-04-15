@@ -37,6 +37,7 @@
         _gameChessBoard = chessBoard;
         _chessMap = [[NSMutableDictionary alloc]init];
         _orginChess = [[NSMutableArray alloc]init];
+        _chessMapCopy = [[NSMutableDictionary alloc]init];
         chessTextArr = [[NSMutableArray alloc]init];
     }
     return self;
@@ -105,7 +106,15 @@
     for (BaseChess *chess in _orginChess) {
         [chess resetToOrigin];
         [_gameChessBoard addSubview:chess.uiExhition];
+        if ([chess isKindOfClass:[KingChess class]]) {
+            if (chess.campType == campTypeRed) {
+                _redKing = (KingChess*)chess;
+            }else{
+                _blackKing = (KingChess*)chess;
+            }
+        }
         [_chessMap setObject:chess forKey:chess.relativeLocation.locationString];
+        [_chessMapCopy setObject:chess forKey:chess.relativeLocation.locationString];
     }
     _currentChess = nil;
 }
@@ -129,6 +138,7 @@
                     switch (abs(colum-5)) {
                         case 0:
                             chess = [[KingChess alloc]initWithCamp:campTypeBlack location:p chessSize:_gameChessBoard.chessSize];
+                            _blackKing = (KingChess*)chess;
                             break;
                         case 1:
                             chess = [[GuardChess alloc]initWithCamp:campTypeBlack location:p chessSize:_gameChessBoard.chessSize];
@@ -171,6 +181,7 @@
                     switch (abs(colum-5)) {
                         case 0:
                             chess = [[KingChess alloc]initWithCamp:campTypeRed location:p chessSize:_gameChessBoard.chessSize];
+                            _redKing = (KingChess*)chess;
                             break;
                         case 1:
                             chess = [[GuardChess alloc]initWithCamp:campTypeRed location:p chessSize:_gameChessBoard.chessSize];
@@ -213,59 +224,82 @@
                     [_gameChessBoard addSubview:chess.uiExhition];
                     [_orginChess addObject:chess];
                     [_chessMap setObject:chess forKey:key];
+                    
+                    [_chessMapCopy setObject:[chess copy] forKey:chess.relativeLocation.locationString];
+//                    [_chessMapCopy setObject:chess forKey:chess.relativeLocation.locationString];
                 }
             }
         }
     }
 }
+#pragma mark -- 判断当前下棋人老将是被将军
+-(BOOL)kingIsBeAttacking
+{
+    BOOL kingIsBeAttacking = NO;
+    for (BaseChess *chess in [_chessMapCopy allValues]){
+        if(chess.campType!=currentMoveCamp)//当前下下棋人的子不予考虑
+        {
+            if ([self kingIsBeThreatnInChess:chess]) {
+                return YES;
+            }
+        }
+        
+    }
+    return kingIsBeAttacking;
+}
 
 
-#pragma chessBoadDelegate
+
+
+-(BOOL)kingIsBeThreatnInChess:(BaseChess*)chess
+{
+    if (chess.attackType!=attacktiveType)//所有非进攻型均不能直接威胁老将
+    {
+        return NO;
+    }
+    if (chess.campType==campTypeRed)//如果是红棋,则判断是否能吃到黑将
+    {
+        return [self chess:chess isCanLocationTo:_blackKing.relativeLocation withChessMap:_chessMapCopy];
+    }
+    else{
+        return [self chess:chess isCanLocationTo:_redKing.relativeLocation withChessMap:_chessMapCopy];
+    }
+    return NO;
+}
+
+#pragma mark --chessBoadDelegate
 -(void)chessBoard:(ChessBoard*)chessBoard TouchCoordinationString:(NSString*)coordinate;
 {
     if (_currentChess.campType!=currentMoveCamp)//没有轮到自己行棋,均视为不合法;
     {
         return;
     }
-    if ([self isExistChessInCoordinateString:coordinate]) {
+    if ([self isExistChessInCoordinateString:coordinate inChessMap:_chessMap]) {
         return;
     }
-    //无论如何先移除
-    ChessLocationModel *model = [chessBoard.coordinateDictionay objectForKey:coordinate];
-    
-    if ([self chess:_currentChess isCanLocationTo:model]) {
-        [self createChessText:_currentChess location:model];
-        [_chessMap removeObjectForKey:_currentChess.relativeLocation.locationString];
-        [_currentChess chess_move:model];
-        [_chessMap setObject:_currentChess forKey:model.locationString];
-        _currentChess.uiExhition.selected = NO;
-        
-        if (currentMoveCamp == campTypeRed) {
-            currentMoveCamp = campTypeBlack;
-        }else
-        {
-            currentMoveCamp = campTypeRed;
-        }
-        gameOrder++;
-        _currentChess = nil;
-        
+    //先模拟走子能否通过
+    if ([self preMoveChess:_currentChess.relativeLocation.locationString moveToLocation:[_gameChessBoard.coordinateDictionay objectForKey:coordinate]]) {
+        [self moveCurrentChesstoTargetLocation:[_gameChessBoard.coordinateDictionay objectForKey:coordinate]];
+         
     }else
     {
         _currentChess.uiExhition.selected = NO;
         _currentChess = nil;
     }
 }
+#pragma  mark --准备
 -(void)chessBoardPrepareForPlay:(ChessBoard *)chessBoard
 {
     [self prepareForPlay];
 }
+#pragma  mark --重置
 -(void)chessBoardResetChesses:(ChessBoard *)chessBoard
 {
     [self restChess];
 }
 
 
-#pragma chessDelegate
+#pragma mark --chessDelegate
 -(void)chess:(BaseChess*)chess uiBeClicked:(UIButton*)btn;
 {
     
@@ -297,28 +331,12 @@
             return;
         }
         //判断是否可以吃
-        if ([self chess:_currentChess isCanLocationTo:chess.relativeLocation]) {
-            
-            [self createChessText:_currentChess location:chess.relativeLocation];
-            //吃子过程
-            chess.isDeath = YES;//杀死目标棋子
-            [chess.uiExhition removeFromSuperview];//从棋盘上移除
-            [_chessMap removeObjectForKey:_currentChess.relativeLocation.locationString];//移出map
-            //子落到位置
-            _currentChess.relativeLocation = chess.relativeLocation;
-            //更新字典
-            [_chessMap setObject:_currentChess forKey:_currentChess.relativeLocation.locationString];
-            _currentChess.uiExhition.selected = NO;
-            
-            if (currentMoveCamp == campTypeRed) {
-                currentMoveCamp = campTypeBlack;
-            }else
-            {
-                currentMoveCamp = campTypeRed;
-            }
-            gameOrder++;
-            _currentChess = nil;
-        }else
+        if ([self preEaeChess:_currentChess.relativeLocation.locationString eatChess:chess.relativeLocation.locationString])//预演吃子是否合法;
+        {
+            //吃子
+            [self eatChess:_currentChess beEatedChess:chess];
+        }
+        else
         {
             _currentChess.uiExhition.selected = NO;
             _currentChess = nil;
@@ -333,12 +351,15 @@
  *
  *  @return 是否有
  */
--(BOOL)isExistChessInCoordinateString:(NSString*)coordinateString
+#pragma --mark 判断某个棋盘某个位置是否有子
+-(BOOL)isExistChessInCoordinateString:(NSString*)coordinateString inChessMap:(NSDictionary<NSString*,BaseChess*>*)map
 {
-    return [_chessMap objectForKey:coordinateString]!=nil;
+    return [map objectForKey:coordinateString]!=nil;
 }
 
--(BOOL)chess:(BaseChess*)chess isCanLocationTo:(ChessLocationModel*)location
+
+#pragma --mark 判断某个棋盘是否可以走子;
+-(BOOL)chess:(BaseChess*)chess isCanLocationTo:(ChessLocationModel*)location withChessMap:(NSDictionary<NSString*,BaseChess*>*)map
 {
     if (![chess chess_canMoveToLocation:location]) {
         return NO;
@@ -350,7 +371,7 @@
             {
                 for (int colom = MIN(chess.relativeLocation.column, location.column)+1; colom<MAX(chess.relativeLocation.column, location.column); colom++) {
                     NSString *key = [NSString stringWithFormat:@"(%d,%d)",location.row,colom];
-                    if ([self isExistChessInCoordinateString:key]) {
+                    if ([self isExistChessInCoordinateString:key inChessMap:map]) {
                         return NO;
                     }
                 }
@@ -359,7 +380,7 @@
             {
                 for (int row = MIN(chess.relativeLocation.row, location.row)+1; row<MAX(chess.relativeLocation.row, location.row); row++) {
                     NSString *key = [NSString stringWithFormat:@"(%d,%d)",row,location.column];
-                    if ([self isExistChessInCoordinateString:key]) {
+                    if ([self isExistChessInCoordinateString:key inChessMap:map]) {
                         return NO;
                     }
                 }
@@ -374,7 +395,7 @@
             {
                 for (int colom = MIN(chess.relativeLocation.column, location.column)+1; colom<MAX(chess.relativeLocation.column, location.column); colom++) {
                     NSString *key = [NSString stringWithFormat:@"(%d,%d)",location.row,colom];
-                    if ([self isExistChessInCoordinateString:key]) {
+                    if ([self isExistChessInCoordinateString:key inChessMap:map]) {
                         coutBetweenToLocation++;
                     }
                 }
@@ -406,11 +427,11 @@
             {
                 for (int row = MIN(chess.relativeLocation.row, location.row)+1; row<MAX(chess.relativeLocation.row, location.row); row++) {
                     NSString *key = [NSString stringWithFormat:@"(%d,%d)",row,location.column];
-                    if ([self isExistChessInCoordinateString:key]) {
+                    if ([self isExistChessInCoordinateString:key inChessMap:map]) {
                         coutBetweenToLocation++;
                     }
                 }
-                BaseChess *enamyChess = [_chessMap objectForKey:location.locationString];
+                BaseChess *enamyChess = [map objectForKey:location.locationString];
                 if (coutBetweenToLocation==0) {
                     if (enamyChess) {
                         return NO;
@@ -437,7 +458,7 @@
             int row = (chess.relativeLocation.row+location.row)/2;
             int colom = (chess.relativeLocation.column+location.column)/2;
             NSString *key = [NSString stringWithFormat:@"(%d,%d)",row,colom];
-            if ([self isExistChessInCoordinateString:key]) {
+            if ([self isExistChessInCoordinateString:key inChessMap:map]) {
                 return NO;
             }else{
                 return YES;
@@ -468,24 +489,24 @@
                 case 1://则看正前方有没有子;行减一列不变
                 {
                     key = [NSString stringWithFormat:@"(%d,%d)",chess.relativeLocation.row-1,chess.relativeLocation.column];
-                    return ![self isExistChessInCoordinateString:key];
+                    return ![self isExistChessInCoordinateString:key inChessMap:map];
                 }
                 case 2://正左面.列减一;行不变
                 {
                     key = [NSString stringWithFormat:@"(%d,%d)",chess.relativeLocation.row,chess.relativeLocation.column-1];
-                    return ![self isExistChessInCoordinateString:key];
+                    return ![self isExistChessInCoordinateString:key inChessMap:map];
 
                 }
                 case 3://正下方;行加1;列不变
                 {
                     key = [NSString stringWithFormat:@"(%d,%d)",chess.relativeLocation.row+1,chess.relativeLocation.column];
-                    return ![self isExistChessInCoordinateString:key];
+                    return ![self isExistChessInCoordinateString:key inChessMap:map];
 
                 }
                 case 4://正右方;行不变,列加1
                 {
                     key = [NSString stringWithFormat:@"(%d,%d)",chess.relativeLocation.row,chess.relativeLocation.column+1];
-                    return ![self isExistChessInCoordinateString:key];
+                    return ![self isExistChessInCoordinateString:key inChessMap:map];
 
                 }
                 default:
@@ -498,6 +519,7 @@
     }
     return NO;
 }
+#pragma  mark --棋谱生成
 -(void)createChessText:(BaseChess*)chess location:(ChessLocationModel*)location
 {
     //判断该子所在列，有没有跟自己一样并且一个阵营的子；
@@ -672,6 +694,154 @@
     NSLog(@"%@",[NSString stringWithFormat:@"%@\n",record.chessTextString]);
     [chessTextArr addObject:record];
     
+}
+
+#pragma mark --模拟吃子
+void  eat(BaseChess *eatChess,BaseChess *beEatedChess,NSMutableDictionary<NSString*,BaseChess*> *chessMap)
+{
+    //从map中移除即将吃子的子;
+    [chessMap removeObjectForKey:eatChess.relativeLocation.locationString];
+    //吃子的子位置更新到死亡子位置
+    eatChess.relativeLocation = beEatedChess.relativeLocation;
+    //更新map
+    [chessMap setObject:eatChess forKey:eatChess.relativeLocation.locationString];
+    
+}
+#pragma mark -- 模拟走子
+void  moveChessToLocation(BaseChess *chess,ChessLocationModel*location ,NSMutableDictionary<NSString*,BaseChess*> *chessMap)
+{
+    
+    [chessMap removeObjectForKey:chess.relativeLocation.locationString];//先移除旧位置;
+    chess.relativeLocation  = location;
+    [chessMap setObject:chess forKey:chess.relativeLocation.locationString];//放在新位置了
+}
+
+#pragma mark --在某棋盘内吃子
+-(void)eatChess:(BaseChess*)eatChess beEatedChess:(BaseChess*)beEatedChess
+{
+    [self createChessText:_currentChess location:beEatedChess.relativeLocation];
+    //吃子过程
+    
+    beEatedChess.isDeath = YES;//杀死目标棋子
+    [beEatedChess.uiExhition removeFromSuperview];//从棋盘上移除
+
+    
+    [_chessMap removeObjectForKey:eatChess.relativeLocation.locationString];//移出map
+//    //子落到位置
+    _currentChess.relativeLocation = beEatedChess.relativeLocation;
+    //更新字典
+    [_chessMap setObject:_currentChess forKey:_currentChess.relativeLocation.locationString];
+    _currentChess.uiExhition.selected = NO;
+    
+    if (currentMoveCamp == campTypeRed) {
+        currentMoveCamp = campTypeBlack;
+    }else
+    {
+        currentMoveCamp = campTypeRed;
+    }
+    gameOrder++;
+    _currentChess = nil;
+}
+#pragma mark --某棋盘内移动子
+-(void)moveCurrentChesstoTargetLocation:(ChessLocationModel*)location{
+    [self createChessText:_currentChess location:location];
+    [_chessMap removeObjectForKey:_currentChess.relativeLocation.locationString];
+    [_currentChess chess_move:location];
+    [_chessMap setObject:_currentChess forKey:location.locationString];
+    _currentChess.uiExhition.selected = NO;
+    
+    if (currentMoveCamp == campTypeRed) {
+        currentMoveCamp = campTypeBlack;
+    }else
+    {
+        currentMoveCamp = campTypeRed;
+    }
+    gameOrder++;
+    _currentChess = nil;
+    
+}
+
+
+
+
+
+
+
+/**
+ *  预演某个点的子能否吃掉某个点的字
+ *
+ *  @param eatChessCoordinateString   要吃子的坐标
+ *  @param eatedChessCoordinateString 要被吃掉的子的坐标
+ *
+ *  @return bool
+ */
+#pragma mark --预演吃子能否合法
+-(BOOL)preEaeChess:(NSString*)eatChessCoordinateString eatChess:(NSString*)eatedChessCoordinateString
+//能否吃子;
+{
+    //模拟一个棋盘的副本;多推演一步;
+    BaseChess *eatChess = [_chessMapCopy objectForKey:eatChessCoordinateString];
+    BaseChess *eatedChess = [_chessMapCopy objectForKey:eatedChessCoordinateString];
+    
+    if (![self chess:eatChess isCanLocationTo:eatedChess.relativeLocation withChessMap:_chessMapCopy])
+    {
+        return NO;
+    }else if([self kingIsBeAttacking])//判断当前老将是否正在被将军
+    {
+        return NO;
+        
+    }else //模拟行棋后看看老将是否被将军;
+    {
+        //先模拟行棋
+        eat([eatChess copy], [eatedChess copy], _chessMapCopy);
+        BOOL isBeAttacking = [self kingIsBeAttacking];
+        if (isBeAttacking)//不能预演通过,还原现场
+        {
+            [_chessMapCopy setObject:eatedChess forKey:eatedChess.relativeLocation.locationString];
+            [_chessMapCopy setObject:eatChess forKey:eatChess.relativeLocation.locationString];
+        }
+        return !isBeAttacking;
+    }
+    
+    return NO;
+}
+/**
+ *  用于判断移动是否合法;也是用于预演后自己的老王会不会被将死
+ *
+ *  @return
+ */
+#pragma mark --预演移动能否合法
+-(BOOL)preMoveChess:(NSString*)chessLocation moveToLocation:(ChessLocationModel*)targetLocation//能否移动;
+{
+    BaseChess *chess = [_chessMapCopy objectForKey:chessLocation];
+    
+    ChessLocationModel *originLocation = [chess.relativeLocation copy];//保留现场
+    if (![self chess:chess isCanLocationTo:targetLocation withChessMap:_chessMapCopy]) {
+        return NO;
+    }else if([self kingIsBeAttacking])//判断当前老将是否正在被将军
+    {
+        return YES;
+        
+    }else //模拟行棋后看看老将是否被将军;
+    {
+        //先模拟行棋子
+        moveChessToLocation(chess, targetLocation, _chessMapCopy);
+        //此时chess的relativeLocation已经发生改变;
+        if([self kingIsBeAttacking])//说明不能通过,还原现场
+        {
+            //还原现场
+            [_chessMapCopy removeObjectForKey:chess.relativeLocation.locationString];//移除新位置
+            chess.relativeLocation = originLocation;//还原
+            [_chessMapCopy setObject:chess forKey:chess.relativeLocation.locationString];
+            return NO;
+        }else
+        {
+            return YES;
+        }
+        
+        
+    }
+    return NO;
 }
 -(void)play
 {

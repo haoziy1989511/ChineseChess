@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface ChessLocationModel : NSObject
+@interface ChessLocationModel : NSObject<NSCopying>
 
 @property(nonatomic,copy)NSString* locationString;//拼接好的key
 @property(nonatomic,assign)int row;//棋盘中的行

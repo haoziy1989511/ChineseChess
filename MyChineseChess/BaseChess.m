@@ -10,6 +10,16 @@
 
 @implementation BaseChess
 
+- (id)copyWithZone:(nullable NSZone *)zone;
+{
+    BaseChess *copy = [[[self class] allocWithZone:zone]initWithCamp:self.campType location:[self.relativeLocation copy]  chessSize:self.chessSize];
+    return copy;
+}
+//-(id)copy
+//{
+//    return [super copy];
+//}
+
 -(void)chess_move:(ChessLocationModel*)targetLocation;//移动方法
 {
     _relativeLocation = targetLocation;
@@ -46,6 +56,7 @@
         [_uiExhition addTarget:self action:@selector(clicked:) forControlEvents:UIControlEventTouchUpInside];
         _uiExhition.frame = CGRectMake(initPosition.absolutPoint.x-chessSize.width/2, initPosition.absolutPoint.y-chessSize.height/2, chessSize.width, chessSize.height);
         _uiExhition.layer.cornerRadius = chessSize.width/2;
+        _chessSize = chessSize;
         [self setup];
     }
     return self;
