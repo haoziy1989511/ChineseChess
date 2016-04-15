@@ -35,7 +35,7 @@
         _chessColumnEnd = location.column;
         _chessRowEnd = location.row;
         isContaintAmbigous = ambigous;
-        if (location.column==chess.relativeLocation.column)//只有车，或者炮会走到此情形
+        if (location.column==chess.relativeLocation.column)//只有车，或者炮,兵,将会走到此情形;垂直走;
         {
             stepLength = abs(_chessRowEnd-_chessRowStart);
         }else
@@ -53,7 +53,17 @@
             {
                 _chessMoveType = ChessTextMoveRight;//右平
             }
-        }else
+        }else if(chess.relativeLocation.column==location.column)//列相同,垂直前进或者后退
+        {
+            if(chess.relativeLocation.row>location.row)//棋子的row比目的地大,说明往棋盘上方;
+            {
+                _chessMoveType = ChessTextMoveStraightUp;//直上
+            }else
+            {
+                _chessMoveType = ChessTextMoveStraightDown;//直下
+            }
+        }
+        else
         {
             if (chess.relativeLocation.row>location.row)//行减少;
             {
@@ -69,11 +79,17 @@
 
 -(NSString*)chessTextString
 {
-    NSString *startName = nil;
-    if (_chessMoveType==ChessTextMoveLeft||_chessMoveType==ChessTextMoveRight) {
-        startName = [self horizonMoveMapStepLength:stepLength];
-    }else{
-        startName = [self chineseNameMapSteplength:stepLength];
+    NSString *stepName = nil;
+    //steplength如果是坐标,则红棋需要映射;如果是差值;则不需要;
+    if (_chessMoveType==ChessTextMoveLeft||_chessMoveType==ChessTextMoveRight)//水平移动;
+    {
+        stepName = [self horizonMoveMapStepLength:stepLength];
+    }else if(_chessMoveType==ChessTextMoveStraightDown||_chessMoveType==ChessTextMoveStraightUp)//垂直移动
+    {
+        stepName = [self verticalMoveMapStepLength:stepLength];
+    }else
+    {
+        stepName = [self chineseNameMapSteplength:stepLength];
     }
     
     switch (isContaintAmbigous) {
@@ -83,7 +99,7 @@
                     _chessName,
                     [self chineseNameMapOrder:_recordOrder number:_chessColumnStart],
                     [self forwardOrBack:_chessMoveType],
-                    startName];
+                    stepName];
         }
             break;
         case ChessTextAmbiguousFront:
@@ -93,7 +109,7 @@
                     @"前",
                     _chessName,
                     [self forwardOrBack:_chessMoveType],
-                    startName];
+                    stepName];
         }
         case ChessTextAmbiguousBehind:
         {
@@ -111,7 +127,7 @@
                     @"中",
                     _chessName,
                     [self forwardOrBack:_chessMoveType],
-                    startName];
+                    stepName];
         }
         case ChessTextAmbiguousOne:
         {
@@ -120,7 +136,7 @@
                     [self chineseNameMapSteplength:1],
                     _chessName,
                     [self forwardOrBack:_chessMoveType],
-                    startName];
+                    stepName];
         }
         case ChessTextAmbiguousTwo:
         {
@@ -129,7 +145,7 @@
                     [self chineseNameMapSteplength:2],
                     _chessName,
                     [self forwardOrBack:_chessMoveType],
-                    startName];
+                    stepName];
         }
         case ChesstextAmbiguousThree:
         {
@@ -138,7 +154,7 @@
                     [self chineseNameMapSteplength:3],
                     _chessName,
                     [self forwardOrBack:_chessMoveType],
-                    startName];
+                    stepName];
         }
         case ChesstextAmbiguousFour:
         {
@@ -147,7 +163,7 @@
                     [self chineseNameMapSteplength:4],
                     _chessName,
                     [self forwardOrBack:_chessMoveType],
-                    startName];
+                    stepName];
         }
         case ChesstextAmbiguousFive:
         {
@@ -156,7 +172,7 @@
                     [self chineseNameMapSteplength:1],
                     _chessName,
                     [self forwardOrBack:_chessMoveType],
-                    startName];
+                    stepName];
         }
         default:
             break;
@@ -189,6 +205,27 @@
                 return @"退";
             }
         }
+        case ChessTextMoveStraightUp:
+        {
+            if (_recordOrder%2==1)//红棋往上方移动是 进 反之 退
+            {
+                return  @"进";
+            }else
+            {
+                return @"退";
+            }
+        }
+            break;
+        case ChessTextMoveStraightDown:
+        {
+            if (_recordOrder%2==0)//黑棋往下方移动 是进 反之 退
+            {
+                return  @"进";
+            }else
+            {
+                return @"退";
+            }
+        }
         case ChessTextMoveRight:
         {
             return @"平";
@@ -203,7 +240,14 @@
     }
 
 }
--(NSString*)horizonMoveMapStepLength:(uint)number//水平移动的左边映射
+/**
+ *  水平坐标映射
+ *
+ *  @param number 绝对坐标列
+ *
+ *  @return 对应的中文
+ */
+-(NSString*)horizonMoveMapStepLength:(uint)number//水平移动的坐标映射需要转化红棋的坐标
 {
     assert(number<=9&&number>0);
     if (_recordOrder%2==1)//红棋 返回大写中文
@@ -236,13 +280,53 @@
         return [NSString stringWithFormat:@"%d",number];
     }
 }
-
--(NSString*)chineseNameMapSteplength:(uint)number;//前进或者后退步长转化，实际切换
+-(NSString*)verticalMoveMapStepLength:(uint)number//垂直坐标转化;//这种情形;行相同,列不同;中文坐标映射
 {
     assert(number<=9&&number>0);
     if (_recordOrder%2==1)//红棋 返回大写中文
     {
         switch (number) {
+            case 1:
+                return @"一";
+            case 2:
+                return @"二";
+            case 3:
+                return @"三";
+            case 4:
+                return @"四";
+            case 5:
+                return @"五";
+            case 6:
+                return @"六";
+            case 7:
+                return @"七";
+            case 8:
+                return @"八";
+            case 9:
+                return @"九";
+            default:
+                return nil;
+                break;
+        }
+    }else
+    {
+        return [NSString stringWithFormat:@"%d",number];
+    }
+}
+
+/**
+ *  非垂直或者水平方向移动;
+ *
+ *  @param number 这个是目的地绝对坐标列数值
+ *
+ *  @return 对应的中文坐标
+ */
+-(NSString*)chineseNameMapSteplength:(uint)number;//前进或者后退步长转化，实际切换
+{
+    assert(number<=9&&number>0);
+    if (_recordOrder%2==1)//红棋 返回大写中文
+    {
+        switch (10-number) {
             case 1:
                 return @"一";
             case 2:

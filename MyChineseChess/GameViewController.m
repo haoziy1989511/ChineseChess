@@ -97,6 +97,7 @@
 -(void)restChess
 {
     currentMoveCamp = campTypeRed;
+    gameOrder = 1;
     for (BaseChess *chess in [_chessMap allValues]) {
         [chess.uiExhition removeFromSuperview];
     }
@@ -111,6 +112,7 @@
 -(void)prepareForPlay
 {
     currentMoveCamp = campTypeRed;
+    gameOrder = 1;
     if (_orginChess.count>0) {
         [self restChess];
         return;

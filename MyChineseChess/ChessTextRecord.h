@@ -15,7 +15,7 @@
 //
 typedef NS_ENUM(NSInteger,ChesstextAmbiguous)
 {
-    ChessTextAmbiguousNone = 1,//1->0->1-1不含歧义,原始数字->移位数->二进制数->最终数字
+    ChessTextAmbiguousNone = 1,//1->1->1-1不含歧义,原始数字->移位数->二进制数->最终数字
     ChessTextAmbiguousFront = 1<<1,//1->1->10->2,前 后面一个兄弟类型
     ChessTextAmbiguousBehind = 1<<2, //1->2->100->4 后 后面没有兄弟类型
     
@@ -33,8 +33,12 @@ typedef NS_ENUM(NSInteger,ChesstextAmbiguous)
 typedef NS_ENUM(NSInteger,ChessTextMoveTpye)
 {
     ChessTextMoveTypeUnknow = 0,//未知的.不合法
+    
     ChessTextMoveUp,//虚拟坐标位置row减小了;往棋盘上方走
     ChessTextMoveDown,//虚拟坐标位置row增加了;往棋盘下方走
+    
+    ChessTextMoveStraightUp, //垂直向上,列相同;行减小
+    ChessTextMoveStraightDown, //垂直向下,列相同;行增加
     
     ChessTextMoveLeft,//左平,只能针对平行移动的棋
     
