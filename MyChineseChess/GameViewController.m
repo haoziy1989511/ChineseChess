@@ -253,16 +253,20 @@
 
 -(BOOL)kingIsBeThreatnInChess:(BaseChess*)chess
 {
+    
     if (chess.attackType!=attacktiveType)//所有非进攻型均不能直接威胁老将
     {
         return NO;
     }
     if (chess.campType==campTypeRed)//如果是红棋,则判断是否能吃到黑将
     {
-        return [self chess:chess isCanMoveLocationTo:_blackKing.relativeLocation withChessMap:_chessMapCopy];
+        NSLog(@"%@%@,位置%@,,,,将位置:%@",chess.campType==campTypeRed?@"红":@"黑",chess.chessName,chess.relativeLocation.locationString,_blackKing.relativeLocation.locationString);
+        return [self chess:chess isCanEatLocationTo:_blackKing.relativeLocation withChessMap:_chessMapCopy];
+        
     }
     else{
-        return [self chess:chess isCanMoveLocationTo:_redKing.relativeLocation withChessMap:_chessMapCopy];
+        NSLog(@"%@%@,位置%@,,,,将位置:%@",chess.campType==campTypeRed?@"红":@"黑",chess.chessName,chess.relativeLocation.locationString,_redKing.relativeLocation.locationString);
+        return [self chess:chess isCanEatLocationTo:_redKing.relativeLocation withChessMap:_chessMapCopy];
     }
     return NO;
 }
@@ -372,7 +376,7 @@
                     coutBetweenToLocation++;
                 }
             }
-        }else
+        }else if(chess.relativeLocation.column==location.column)
         {
             for (int row = MIN(chess.relativeLocation.row, location.row)+1; row<MAX(chess.relativeLocation.row, location.row); row++) {
                 NSString *key = [NSString stringWithFormat:@"(%d,%d)",row,location.column];
@@ -380,6 +384,9 @@
                     coutBetweenToLocation++;
                 }
             }
+        }else
+        {
+            return NO;
         }
         if (coutBetweenToLocation==1)//有且只有一个子才能吃
         {
@@ -388,7 +395,7 @@
             return NO;
         }
     }else{
-        return [self chess:chess isCanEatLocationTo:location withChessMap:map];
+        return [self chess:chess isCanMoveLocationTo:location withChessMap:map];
     }
 }
 
@@ -772,7 +779,7 @@ void  moveChessToLocation(BaseChess *chess,ChessLocationModel*location ,NSMutabl
     BaseChess *eatChess = [_chessMapCopy objectForKey:eatChessCoordinateString];
     BaseChess *eatedChess = [_chessMapCopy objectForKey:eatedChessCoordinateString];
     
-    if (![self chess:eatChess isCanMoveLocationTo:eatedChess.relativeLocation withChessMap:_chessMapCopy])
+    if (![self chess:eatChess isCanEatLocationTo:eatedChess.relativeLocation withChessMap:_chessMapCopy])
     {
         return NO;
     }else if([self kingIsBeAttacking])//判断当前老将是否正在被将军
@@ -805,11 +812,13 @@ void  moveChessToLocation(BaseChess *chess,ChessLocationModel*location ,NSMutabl
     BaseChess *chess = [_chessMapCopy objectForKey:chessLocation];
     
     ChessLocationModel *originLocation = [chess.relativeLocation copy];//保留现场
-    if (![self chess:chess isCanMoveLocationTo:targetLocation withChessMap:_chessMapCopy]) {
+    
+    if (![self chess:chess isCanMoveLocationTo:targetLocation withChessMap:_chessMapCopy])//不在移动范围直接返回NO
+    {
         return NO;
     }else if([self kingIsBeAttacking])//判断当前老将是否正在被将军
     {
-        return YES;
+        return NO;
         
     }else //模拟行棋后看看老将是否被将军;
     {
